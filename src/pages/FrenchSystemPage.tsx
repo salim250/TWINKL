@@ -5,7 +5,7 @@ export const FrenchSystemPage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(https://images.pexels.com/photos/5212700/pexels-photo-5212700.jpeg?auto=compress&cs=tinysrgb&w=1600)',
+            'url(../../../assets/img/french_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -23,25 +23,25 @@ export const FrenchSystemPage = () => {
 
       <section className="py-20 bg-white">
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              The French education system is renowned worldwide for its academic rigor and
-              comprehensive approach to learning. Our French system program follows the French
-              national curriculum, providing students with a structured and demanding educational
-              pathway that prepares them for the French Baccalauréat and beyond.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              Students benefit from a well-rounded education that emphasizes critical thinking,
-              analytical skills, and a deep understanding of core subjects. The curriculum is
-              designed to develop intellectual curiosity and academic excellence while fostering
-              cultural awareness and linguistic proficiency in French.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed">
-              Our experienced native French-speaking teachers deliver authentic instruction aligned
-              with French Ministry of Education standards. From École Primaire through Lycée,
-              students receive a world-class education that opens doors to French universities and
-              international opportunities.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                At TWINKL Education, we are proud to follow the excellence of the French education system, known for its strong academic foundation, critical thinking, and structured learning approach.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                Our curriculum emphasizes rigor, discipline, and analytical skills, helping students develop a deep understanding of sciences, languages, and humanities.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed">
+                Through personalized teaching and a supportive environment, we guide learners to achieve outstanding results and prepare confidently for national and international examinations. The French system at TWINKL Education encourages intellectual curiosity, cultural awareness, and lifelong learning.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <img
+                src="../../../assets/img/french_flayer.jpg"
+                alt="French Flyer"
+                className="w-full max-w-md rounded-xl shadow-lg object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

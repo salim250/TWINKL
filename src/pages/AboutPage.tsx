@@ -54,16 +54,10 @@ export const AboutPage = () => {
                 Our Story
               </h2>
               <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-                TWINKL Education was founded with a vision to provide world-class educational
-                support that empowers students to reach their full potential. As a dedicated
-                tutoring and learning center, we understand that every student has unique learning
-                needs and aspirations.
+                TWINKL Education, part of TWINKL, is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.
               </p>
               <p className="text-lg font-body text-text-muted leading-relaxed">
-                Through personalized teaching approaches and access to multiple international
-                curricula, we create tailored learning experiences that build confidence,
-                competence, and a lifelong love of learning. Our commitment to excellence has made
-                us a trusted partner for families seeking quality education.
+                We provide high-quality education through personalized teaching, innovative programs, and a supportive environment, preparing every learner for academic success and lifelong growth.
               </p>
             </div>
             <div>

@@ -25,7 +25,7 @@ export const IBPage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(https://images.pexels.com/photos/4145356/pexels-photo-4145356.jpeg?auto=compress&cs=tinysrgb&w=1600)',
+            'url(../../../assets/img/international_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -43,49 +43,22 @@ export const IBPage = () => {
 
       <section className="py-20 bg-white">
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              The International Baccalaureate offers a continuum of education that challenges
-              students to excel in their studies and in their personal development. IB programs
-              encourage students to become active, compassionate lifelong learners who understand
-              that other people, with their differences, can also be right.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              Our IB-trained educators create an engaging learning environment that promotes
-              inquiry-based learning, critical thinking, and international-mindedness. Students
-              develop the knowledge, skills, and attitudes they need to succeed in a rapidly
-              changing world.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed">
-              From the Primary Years Programme through the Diploma Programme, IB learners strive to
-              be inquirers, knowledgeable, thinkers, communicators, principled, open-minded,
-              caring, risk-takers, balanced, and reflective. These learner profile attributes guide
-              our approach to teaching and learning.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-background-light">
-        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-heading font-bold text-text-dark mb-4 tracking-heading">
-              IB Programs
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {levels.map((level, index) => (
-              <div
-                key={index}
-                className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <div className="text-secondary mb-4">{level.icon}</div>
-                <h3 className="text-2xl font-heading font-bold text-text-dark mb-3">
-                  {level.title}
-                </h3>
-                <p className="font-body text-text-muted leading-relaxed">{level.description}</p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                At TWINKL Education, we proudly support the principles of the International Baccalaureate (IB) — a world-class academic framework that inspires students to become confident, compassionate, and globally minded learners.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                The IB program encourages critical thinking, creativity, and international awareness, empowering students to explore ideas, question assumptions, and engage with real-world challenges. Through an inquiry-based approach, learners develop the skills and mindset needed to succeed in higher education and beyond.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <img
+                src="../../../assets/img/international_flayer.jpg"
+                alt="IB Flyer"
+                className="w-full max-w-md rounded-xl shadow-lg object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

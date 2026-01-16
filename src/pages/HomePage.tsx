@@ -1,5 +1,6 @@
 import { BookOpen, GraduationCap, Globe, Users, Award, ArrowRight } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import { motion } from 'framer-motion';
 
 export const HomePage = () => {
   const { setCurrentPage } = useNavigation();
@@ -8,27 +9,27 @@ export const HomePage = () => {
     {
       icon: <BookOpen className="w-12 h-12" />,
       title: 'Sciences',
-      description: 'Physics, Chemistry, Biology, and Environmental Sciences',
+      description: 'Biology, Chemistry, Physics, Coordinated/Combined Science',
     },
     {
       icon: <GraduationCap className="w-12 h-12" />,
       title: 'Mathematics',
-      description: 'Algebra, Geometry, Calculus, and Statistics',
+      description: 'Mathematics (Core and Extended), Further Mathematics, Applied Mathematics',
     },
     {
       icon: <Globe className="w-12 h-12" />,
       title: 'Languages',
-      description: 'English, French, Arabic, and other world languages',
+      description: 'English (Reading, Writing, Speaking), French, Arabic, Other foreign languages (optional)',
     },
     {
       icon: <Users className="w-12 h-12" />,
-      title: 'Humanities',
-      description: 'History, Geography, Economics, and Social Studies',
+      title: 'Humanities & Social Sciences',
+      description: 'History, Geography, Economics, Global Perspectives, Business Studies',
     },
     {
       icon: <Award className="w-12 h-12" />,
-      title: 'Arts',
-      description: 'Visual Arts, Music, Drama, and Creative Expression',
+      title: 'Arts & Creative Subjects',
+      description: 'Art & Design, Music, Drama, ICT',
     },
   ];
 
@@ -37,31 +38,31 @@ export const HomePage = () => {
       title: 'Cambridge International',
       description:
         'World-class international education with globally recognized qualifications',
-      image: 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '../../../assets/img/cambridge.jpg',
       page: 'cambridge' as const,
     },
     {
       title: 'International Baccalaureate',
       description: 'Comprehensive IB programs fostering critical thinking and global citizenship',
-      image: 'https://images.pexels.com/photos/4145356/pexels-photo-4145356.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '../../../assets/img/internationalBac.png',
       page: 'ib' as const,
     },
     {
       title: 'French System',
       description: 'Excellence in French education following the national curriculum',
-      image: 'https://images.pexels.com/photos/5212700/pexels-photo-5212700.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '../../../assets/img/french.jpg',
       page: 'french' as const,
     },
     {
       title: 'Tunisian System',
       description: 'Quality education aligned with Tunisian national standards',
-      image: 'https://images.pexels.com/photos/5212703/pexels-photo-5212703.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '../../../assets/img/tunisian.jpg',
       page: 'tunisian' as const,
     },
     {
       title: 'Canadian System',
       description: 'Innovative Canadian curriculum promoting inquiry-based learning',
-      image: 'https://images.pexels.com/photos/5212706/pexels-photo-5212706.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '../../../assets/img/canadian.png',
       page: 'canadian' as const,
     },
   ];
@@ -69,6 +70,24 @@ export const HomePage = () => {
   const handleNavigate = (page: any) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
   };
 
   return (
@@ -83,14 +102,17 @@ export const HomePage = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-secondary/80"></div>
         </div>
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto"
+        >
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 tracking-heading">
-            Empowering Students
-            <br />
-            Through Excellence
+            Welcome to TWINKL Education!
           </h1>
           <p className="text-xl md:text-2xl font-body mb-8 leading-relaxed">
-            Premium tutoring and learning center offering multiple international curricula
+            We inspire young learners to achieve academic excellence through personalized teaching and a nurturing environment.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -107,10 +129,16 @@ export const HomePage = () => {
               Learn More
             </button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="py-20 bg-white">
+      <motion.section
+        className="py-20 bg-white"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -118,15 +146,10 @@ export const HomePage = () => {
                 About TWINKL Education
               </h2>
               <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-                TWINKL Education is a dedicated tutoring and learning center committed to nurturing
-                students through personalized teaching and various international curricula. We
-                believe in creating a supportive environment where every student can thrive and
-                reach their full potential.
+                TWINKL Education, part of TWINKL, is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.
               </p>
               <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-                Our experienced educators employ innovative teaching methods tailored to each
-                student's unique learning style, ensuring comprehensive understanding and academic
-                excellence.
+                We provide high-quality education through personalized teaching, innovative programs, and a supportive environment, preparing every learner for academic success and lifelong growth.
               </p>
               <button
                 onClick={() => handleNavigate('about')}
@@ -145,7 +168,7 @@ export const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <section className="py-20 bg-background-light">
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,12 +180,21 @@ export const HomePage = () => {
               Comprehensive academic support across all major subject areas
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <motion.div
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+
             {subjects.map((subject, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={fadeUp}
                 className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
               >
+
                 <div className="text-secondary mb-4 group-hover:scale-110 transition-transform">
                   {subject.icon}
                 </div>
@@ -170,13 +202,19 @@ export const HomePage = () => {
                   {subject.title}
                 </h3>
                 <p className="font-body text-text-muted leading-relaxed">{subject.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <motion.section
+        className="py-20 bg-white"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-heading font-bold text-text-dark mb-4 tracking-heading">
@@ -188,10 +226,12 @@ export const HomePage = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {programs.map((program, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="group cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                variants={fadeUp}
                 onClick={() => handleNavigate(program.page)}
+                whileHover={{ scale: 1.02 }}
+                className="group cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -213,13 +253,19 @@ export const HomePage = () => {
                     <ArrowRight className="ml-1 w-4 h-4" />
                   </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-20 bg-gradient-to-r from-primary to-secondary text-white">
+      <motion.section
+        className="py-20 bg-gradient-to-r from-primary to-secondary text-white"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-heading font-bold mb-6 tracking-heading">
             Ready to Start Your Learning Journey?
@@ -236,7 +282,7 @@ export const HomePage = () => {
             <ArrowRight className="ml-2 w-5 h-5" />
           </button>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

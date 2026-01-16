@@ -5,7 +5,7 @@ export const TunisianSystemPage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(https://images.pexels.com/photos/5212703/pexels-photo-5212703.jpeg?auto=compress&cs=tinysrgb&w=1600)',
+            'url(../../../assets/img/tunisian_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -22,26 +22,26 @@ export const TunisianSystemPage = () => {
       </section>
 
       <section className="py-20 bg-white">
-        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              Our Tunisian System program provides comprehensive support for students following the
-              Tunisian national curriculum. We offer expert tutoring aligned with the Ministry of
-              Education's requirements, helping students excel in their studies and prepare for the
-              Baccalauréat examination.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              With deep understanding of the Tunisian educational framework, our qualified teachers
-              deliver targeted instruction that addresses the specific needs of Tunisian students.
-              We cover all subjects including Arabic, French, Mathematics, Sciences, and Social
-              Studies, ensuring students build a strong foundation for academic success.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed">
-              Whether students need support with daily homework, exam preparation, or comprehensive
-              subject mastery, our personalized approach helps them achieve their full potential
-              within the Tunisian education system. We combine traditional values with modern
-              teaching methodologies to create an effective learning experience.
-            </p>
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="flex justify-center">
+              <img
+                src="../../../assets/img/tunisian_flyer.jpg"
+                alt="Tunisian System Flyer"
+                className="w-full max-w-md rounded-xl shadow-lg object-cover"
+              />
+            </div>
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                At TWINKL Education, we provide programs aligned with the Tunisian national curriculum, ensuring students gain a strong academic foundation while developing critical thinking and problem-solving skills.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                Our approach emphasizes core subjects such as Mathematics, Sciences, Languages, and Humanities, preparing learners for national examinations and higher education opportunities.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed">
+                We combine structured teaching with personalized support to help students excel academically, grow personally, and build the skills needed for future success.
+              </p>
+            </div>
           </div>
         </div>
       </section>

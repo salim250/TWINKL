@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter, Timer } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
 
 export const Footer = () => {
@@ -57,19 +57,36 @@ export const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
                 <span className="text-white/80">
-                  123 Education Street
+                  Rue Fadhel Ben Achour
                   <br />
-                  Tunis, Tunisia
+                  Ariana 1004, Tunisia
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-secondary flex-shrink-0" />
-                <span className="text-white/80">+216 XX XXX XXX</span>
+                <span className="text-white/80">
+                  +216 28 557 779
+                  <br />
+                  +216 20 222 226
+                </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-secondary flex-shrink-0" />
-                <span className="text-white/80">info@twinkl-education.com</span>
+                <span className="text-white/80">teducm@gmail.com</span>
               </div>
+              <div className="flex items-center space-x-3">
+                <Timer className="w-5 h-5 text-secondary" />
+
+                <div>
+                  <p className="text-white font-medium leading-relaxed">
+                    Monday – Sunday
+                    <span className="block text-white/80">
+                      9:00 AM – 9:00 PM
+                    </span>
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -100,7 +117,7 @@ export const Footer = () => {
             <h3 className="text-xl font-heading font-bold mb-4">Our Location</h3>
             <div className="bg-white/10 rounded-lg overflow-hidden h-48">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3193.1234567890123!2d10.1815!3d36.8065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDQ4JzIzLjQiTiAxMMKwMTAnNTMuNCJF!5e0!3m2!1sen!2stn!4v1234567890123"
+                src="https://www.google.com/maps?q=36.84783326804408,10.17257186818187&z=15&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

@@ -25,7 +25,7 @@ export const CambridgePage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1600)',
+            'url(../../../assets/img/cambridge_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -43,25 +43,28 @@ export const CambridgePage = () => {
 
       <section className="py-20 bg-white">
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              Cambridge International provides a world-class education that develops learners'
-              critical thinking, problem-solving, and independent learning skills. Our Cambridge
-              programs are recognized by universities and employers worldwide, opening doors to
-              international opportunities.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-              With a focus on developing deep subject knowledge alongside analytical and creative
-              thinking skills, Cambridge learners are confident, responsible, reflective,
-              innovative, and engaged. Our experienced teachers deliver the curriculum using proven
-              pedagogical methods that ensure students reach their full potential.
-            </p>
-            <p className="text-lg font-body text-text-muted leading-relaxed">
-              The Cambridge pathway offers flexibility and choice, with programs available for
-              learners from age 5 to 19. Whether preparing for Cambridge Primary, Lower Secondary,
-              IGCSE, or A-Levels, students benefit from a progressive and rigorous curriculum that
-              prepares them for success in higher education and beyond.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                At TWINKL Education, we follow the Cambridge International curriculum, a globally recognized program designed to develop confident, responsible, and independent learners.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                The curriculum emphasizes critical thinking, creativity, and practical problem-solving, preparing students for academic success and future opportunities worldwide.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                Our Cambridge programs offer structured learning pathways, from Primary (Cambridge Primary) to Secondary (IGCSE) and Advanced (AS & A Levels), ensuring a seamless academic journey.
+              </p>
+              <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
+                With personalized guidance and supportive teaching, we help every student achieve their full potential while fostering a love for learning.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <img
+                src="../../../assets/img/cambridge_flayer.jpg"
+                alt="Cambridge Flyer"
+                className="w-full max-w-md rounded-xl shadow-lg object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

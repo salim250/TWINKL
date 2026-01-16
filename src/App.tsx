@@ -10,7 +10,6 @@ import { CanadianSystemPage } from './pages/CanadianSystemPage';
 import { AboutPage } from './pages/AboutPage';
 import { TeamPage } from './pages/TeamPage';
 import { CareerPage } from './pages/CareerPage';
-import { ContactPage } from './pages/ContactPage';
 import { EnrollPage } from './pages/EnrollPage';
 
 function PageRouter() {
@@ -36,8 +35,6 @@ function PageRouter() {
         return <TeamPage />;
       case 'career':
         return <CareerPage />;
-      case 'contact':
-        return <ContactPage />;
       case 'enroll':
         return <EnrollPage />;
       default:

@@ -1,13 +1,16 @@
 import { CheckCircle, Briefcase, Heart, TrendingUp } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { CareerApplicationForm } from '../components/CareerApplicationForm';
 
 export const CareerPage = () => {
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
+  const applicationRef = useRef<HTMLDivElement | null>(null);
+
   const requirements = [
-    'Bachelor\'s degree or higher in Education or subject specialization',
-    'Teaching certification or relevant credentials',
-    'Experience with international curricula (Cambridge, IB, etc.)',
-    'Excellent communication and interpersonal skills',
-    'Passion for education and student development',
-    'Proficiency in English (additional languages a plus)',
+    'Bachelor\'s degree in the subject area (Master\'s preferred)',
+    'Teaching certification or proven experience',
+    'Strong communication and classroom management skills',
+    'Understanding of international education systems'
   ];
 
   const benefits = [
@@ -131,14 +134,29 @@ export const CareerPage = () => {
               <p className="font-body text-lg mb-6">
                 Ready to make a difference in students' lives?
               </p>
-              <a
-                href="mailto:careers@twinkl-education.com"
+              <button
+                onClick={() => {
+                  setShowApplicationForm(!showApplicationForm);
+                  setTimeout(() => {
+                    applicationRef.current?.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }}
                 className="bg-white text-primary px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-gray-100 transition-colors inline-block"
               >
                 Apply Now
-              </a>
+              </button>
+
             </div>
           </div>
+
+          <div ref={applicationRef} />
+
+          {showApplicationForm && (
+            <div className="mt-12 bg-white rounded-2xl p-8 md:p-10 text-text-dark max-w-3xl mx-auto">
+              <CareerApplicationForm />
+            </div>
+          )}
+
         </div>
       </section>
     </div>

@@ -1,6 +1,37 @@
 import { CheckCircle } from 'lucide-react';
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { EnrollmentApplicationForm } from '../components/EnrollmentApplicationForm';
 
 export const EnrollPage = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setLoading(true);
+
+    const formData = new FormData(formRef.current);
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/mail/enrollment`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error('Failed');
+
+      alert('Enrollment application sent successfully!');
+      formRef.current.reset();
+    } catch (err) {
+      console.error(err);
+      alert('Failed to submit enrollment. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="pt-20">
       <section
@@ -52,22 +83,6 @@ export const EnrollPage = () => {
                   </div>
                 ))}
               </div>
-
-              <div className="bg-secondary/10 p-6 rounded-xl">
-                <h3 className="text-xl font-heading font-bold text-text-dark mb-3">
-                  Need Help Choosing?
-                </h3>
-                <p className="font-body text-text-muted leading-relaxed mb-4">
-                  Our education counselors are available to discuss your needs and help you select
-                  the best program for your goals.
-                </p>
-                <a
-                  href="mailto:info@twinkl-education.com"
-                  className="text-secondary font-body font-semibold hover:underline"
-                >
-                  Schedule a consultation
-                </a>
-              </div>
             </div>
 
             <div>
@@ -75,108 +90,7 @@ export const EnrollPage = () => {
                 <h2 className="text-2xl font-heading font-bold text-text-dark mb-6">
                   Enrollment Form
                 </h2>
-                <form>
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Student Full Name
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body"
-                        placeholder="Student's full name"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Date of Birth
-                      </label>
-                      <input
-                        type="date"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Grade Level
-                      </label>
-                      <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body">
-                        <option>Select grade level</option>
-                        <option>Primary (Ages 5-11)</option>
-                        <option>Middle School (Ages 11-14)</option>
-                        <option>High School (Ages 14-16)</option>
-                        <option>A-Level / Baccalaureate (Ages 16-19)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Curriculum Preference
-                      </label>
-                      <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body">
-                        <option>Select curriculum</option>
-                        <option>Cambridge International</option>
-                        <option>International Baccalaureate</option>
-                        <option>French System</option>
-                        <option>Tunisian System</option>
-                        <option>Canadian System</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Parent/Guardian Name
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body"
-                        placeholder="Parent or guardian name"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body"
-                        placeholder="+216 XX XXX XXX"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-body font-semibold text-text-dark mb-2">
-                        Additional Information
-                      </label>
-                      <textarea
-                        rows={4}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary font-body resize-none"
-                        placeholder="Any specific needs, questions, or comments..."
-                      ></textarea>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="w-full bg-secondary text-white px-6 py-4 rounded-lg font-body font-semibold text-lg hover:bg-secondary/90 transition-colors"
-                    >
-                      Submit Enrollment Application
-                    </button>
-                  </div>
-                </form>
+                <EnrollmentApplicationForm />
               </div>
             </div>
           </div>

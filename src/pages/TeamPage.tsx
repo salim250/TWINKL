@@ -1,44 +1,66 @@
 import { Award, BookOpen, Globe } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { useState } from 'react';
 
 export const TeamPage = () => {
   const teamMembers = [
     {
-      name: 'Dr. Sarah Johnson',
-      role: 'Director of Studies',
-      image: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=400',
-      specialization: 'Cambridge International',
+      name: 'Dr. Cyrine Belhadj',
+      role: 'CEO/Founder of TWINKL Education',
+      image: '../assets/img/team/cyrine_photo.jpg',
+      specialization: 'Biochemistry Teacher',
+      description: 'Dr. Cyrine Belhadj, Founder & CEO of TWINKL Education, is a highly qualified engineer and  university educator with over 10 years of experience in teaching and educational leadership. She is a Certified Cambridge Teacher specializing in Science, committed to fostering academic excellence and holistic development in students. Under her guidance, TWINKL Education provides a structured, innovative, and student-centered learning environment, empowering learners to achieve their full potential and succeed in a global academic landscape.'
     },
     {
-      name: 'Prof. Ahmed Ben Ali',
-      role: 'Head of Sciences',
-      image: 'https://images.pexels.com/photos/5212317/pexels-photo-5212317.jpeg?auto=compress&cs=tinysrgb&w=400',
-      specialization: 'Physics & Chemistry',
+      name: 'Ms. Soumaya Oualha',
+      role: 'Founder, Owner of TWINKL',
+      image: '../assets/img/team/soumaya_photo.jpg',
+      specialization: 'French Teacher',
+      description: `Mrs. Soumaya Oualha is the Founder and the Owner of TWINKL organization and a highly experienced French teacher. 
+      She is dedicated to fostering academic excellence and cultural understanding, providing students with personalized guidance and effective language instruction. 
+      Under her leadership, TWINKL Education promotes a student-centered, innovative learning environment, empowering learners to achieve their full potential.`
     },
     {
-      name: 'Marie Dubois',
-      role: 'French Program Lead',
-      image: 'https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg?auto=compress&cs=tinysrgb&w=400',
-      specialization: 'French System',
+      name: 'Mr. Salim Brahim',
+      role: 'Teacher',
+      image: '../assets/img/team/salim_photo.jpg',
+      specialization: 'ICT Teacher',
+      description: `Mr. Salim Brahim is a highly qualified Software Engineer and ICT Teacher with over three years of experience in developing and maintaining enterprise-level web applications. 
+      He holds a National Engineering Diploma in Computer Engineering from ESPRIT, obtained in 2022. 
+      His expertise includes building robust and scalable solutions, system integration, automated testing, and ensuring quality and reliability. 
+      As a qualified ICT educator, he effectively delivers technology-based instruction and integrates digital tools into modern learning environments.`
     },
     {
-      name: 'David Thompson',
-      role: 'Mathematics Coordinator',
-      image: 'https://images.pexels.com/photos/5378700/pexels-photo-5378700.jpeg?auto=compress&cs=tinysrgb&w=400',
-      specialization: 'Advanced Mathematics',
+      name: 'Ms. Rim Hana',
+      role: 'Teacher',
+      image: '../assets/img/team/rim_photo.jpg',
+      specialization: 'English Teacher',
+      description: `Ms. Rim Hana is a professional English teacher and translator with expertise in language instruction and intercultural communication. 
+      She holds a Master’s Degree in Translation and Interpreting from the Higher Institute of Human Sciences of Tunis and a Bachelor’s Degree in English Language, Literature, and Civilization from the Faculty of Human and Social Sciences of Tunis. 
+      Ms. Bechraoui has taught in several international institutions. She designs interactive, learner-focused lessons aligned with the Cambridge curriculum, integrating digital tools and modern teaching strategies to enhance students’ language proficiency and confidence.`
     },
     {
-      name: 'Fatima Khalil',
-      role: 'IB Coordinator',
-      image: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=400',
-      specialization: 'International Baccalaureate',
+      name: 'Mr. Achref Ben Brahim',
+      role: 'Teacher',
+      image: '../assets/img/team/achref_photo.jpg',
+      specialization: 'Mathemathics Teacher',
+      description: `Mr Achref is an engineer and computer science educator with international experience. He teaches ICT, Mathematics, and Business Studies within the British Curriculum framework. With a background in digital inclusion and technical support, he bridges education and technology. Passionate about empowering youth, he promotes creative and responsible tech learning. Achref fosters innovation and critical thinking through engaging, student-centered teaching.`
     },
     {
-      name: 'Michael Chen',
-      role: 'Language Department Head',
-      image: 'https://images.pexels.com/photos/5378700/pexels-photo-5378700.jpeg?auto=compress&cs=tinysrgb&w=400',
-      specialization: 'English & French',
+      name: 'Ms. Salma ben Khalifa',
+      role: 'Teacher',
+      image: '../assets/img/team/salma_photo.png',
+      specialization: 'Business Teacher',
+      description: `Ms. Salma Ben Khelifa brings strong experience in business development, strategic communication, and organizational leadership. She has served in business-focused roles at both national and international levels, including Business Development Responsible positions at AIESEC and Artiphany, where she managed partnerships, supported talent development, and led training programs in leadership and professional skills. Ms. Ben Khelifa has also worked as Public Relations Manager at iWatch and Events Coordinator at Mdinti, gaining valuable experience in stakeholder management, project coordination, and event strategy. Her professional background in entrepreneurship and youth-centered initiatives allows her to connect business theory with practical, real-world application, inspiring students to develop creativity, leadership, and a global business mindset.`
     },
   ];
+
+  const [selectedMember, setSelectedMember] = useState<any>(null);
 
   return (
     <div className="pt-20">
@@ -75,29 +97,93 @@ export const TeamPage = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={32}
+            navigation
+            pagination={{ clickable: true }}
+            breakpoints={{
+              320: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+          >
             {teamMembers.map((member, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <div className="relative h-64 overflow-hidden bg-gray-200">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
+              <SwiperSlide key={index}>
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+
+                  <div className="relative h-64 bg-gray-200">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h3 className="text-xl font-heading font-bold text-text-dark mb-1">
+                      {member.name}
+                    </h3>
+
+                    <p className="text-secondary font-body font-semibold mb-2">
+                      {member.role}
+                    </p>
+
+                    <p className="text-sm text-text-muted mb-3">
+                      {member.specialization}
+                    </p>
+
+                    <button
+                      className="mt-3 text-secondary text-sm font-medium hover:underline"
+                      onClick={() => setSelectedMember(member)}
+                    >
+                      Read more
+                    </button>
+                  </div>
+
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-heading font-bold text-text-dark mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-secondary font-body font-semibold mb-2">{member.role}</p>
-                  <p className="text-text-muted font-body">{member.specialization}</p>
-                </div>
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
+
+          {selectedMember && (
+            <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center px-4">
+              <div className="bg-white rounded-2xl max-w-lg w-full p-8 relative">
+
+                <button
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-700"
+                  onClick={() => setSelectedMember(null)}
+                >
+                  ✕
+                </button>
+
+                <div className="flex items-center gap-4 mb-6">
+                  <img
+                    src={selectedMember.image}
+                    className="w-20 h-20 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3 className="text-xl font-heading font-bold">
+                      {selectedMember.name}
+                    </h3>
+                    <p className="text-secondary font-medium">
+                      {selectedMember.role}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-text-muted leading-relaxed">
+                  {selectedMember.description}
+                </p>
+
+              </div>
+            </div>
+          )}
+
+          <br />
+          <br />
+          <br />
+
 
           <div className="bg-background-light rounded-2xl p-8 md:p-12">
             <h2 className="text-3xl font-heading font-bold text-text-dark mb-8 text-center tracking-heading">
