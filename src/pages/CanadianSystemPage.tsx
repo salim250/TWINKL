@@ -5,7 +5,7 @@ export const CanadianSystemPage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(../../../assets/img/canadian_school.jpg)',
+            'url(/img/canadian_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -37,7 +37,7 @@ export const CanadianSystemPage = () => {
             </div>
             <div className="flex justify-center">
               <img
-                src="../../../assets/img/canadian_flayer.jpg"
+                src="/img/canadian_flayer.jpg"
                 alt="Canadian Flyer"
                 className="w-full max-w-md rounded-xl shadow-lg object-cover"
               />

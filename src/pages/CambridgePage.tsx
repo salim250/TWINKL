@@ -25,7 +25,7 @@ export const CambridgePage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(../../../assets/img/cambridge_school.jpg)',
+            'url(/img/cambridge_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -60,7 +60,7 @@ export const CambridgePage = () => {
             </div>
             <div className="flex justify-center">
               <img
-                src="../../../assets/img/cambridge_flayer.jpg"
+                src="/img/cambridge_flayer.jpg"
                 alt="Cambridge Flyer"
                 className="w-full max-w-md rounded-xl shadow-lg object-cover"
               />

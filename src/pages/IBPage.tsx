@@ -25,7 +25,7 @@ export const IBPage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(../../../assets/img/international_school.jpg)',
+            'url(/img/international_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -54,7 +54,7 @@ export const IBPage = () => {
             </div>
             <div className="flex justify-center">
               <img
-                src="../../../assets/img/international_flayer.jpg"
+                src="/img/international_flayer.jpg"
                 alt="IB Flyer"
                 className="w-full max-w-md rounded-xl shadow-lg object-cover"
               />

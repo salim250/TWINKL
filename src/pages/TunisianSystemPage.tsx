@@ -5,7 +5,7 @@ export const TunisianSystemPage = () => {
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
         style={{
           backgroundImage:
-            'url(../../../assets/img/tunisian_school.jpg)',
+            'url(/img/tunisian_school.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -26,7 +26,7 @@ export const TunisianSystemPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center">
               <img
-                src="../../../assets/img/tunisian_flyer.jpg"
+                src="/img/tunisian_flyer.jpg"
                 alt="Tunisian System Flyer"
                 className="w-full max-w-md rounded-xl shadow-lg object-cover"
               />

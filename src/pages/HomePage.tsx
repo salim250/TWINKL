@@ -38,31 +38,31 @@ export const HomePage = () => {
       title: 'Cambridge International',
       description:
         'World-class international education with globally recognized qualifications',
-      image: '../../../assets/img/cambridge.jpg',
+      image: '/img/cambridge.jpg',
       page: 'cambridge' as const,
     },
     {
       title: 'International Baccalaureate',
       description: 'Comprehensive IB programs fostering critical thinking and global citizenship',
-      image: '../../../assets/img/internationalBac.png',
+      image: '/img/internationalBac.png',
       page: 'ib' as const,
     },
     {
       title: 'French System',
       description: 'Excellence in French education following the national curriculum',
-      image: '../../../assets/img/french.jpg',
+      image: '/img/french.jpg',
       page: 'french' as const,
     },
     {
       title: 'Tunisian System',
       description: 'Quality education aligned with Tunisian national standards',
-      image: '../../../assets/img/tunisian.jpg',
+      image: '/img/tunisian.jpg',
       page: 'tunisian' as const,
     },
     {
       title: 'Canadian System',
       description: 'Innovative Canadian curriculum promoting inquiry-based learning',
-      image: '../../../assets/img/canadian.png',
+      image: '/img/canadian.png',
       page: 'canadian' as const,
     },
   ];

@@ -12,14 +12,14 @@ export const TeamPage = () => {
     {
       name: 'Dr. Cyrine Belhadj',
       role: 'CEO/Founder of TWINKL Education',
-      image: '../assets/img/team/cyrine_photo.jpg',
+      image: '/img/team/cyrine_photo.jpg',
       specialization: 'Biochemistry Teacher',
       description: 'Dr. Cyrine Belhadj, Founder & CEO of TWINKL Education, is a highly qualified engineer and  university educator with over 10 years of experience in teaching and educational leadership. She is a Certified Cambridge Teacher specializing in Science, committed to fostering academic excellence and holistic development in students. Under her guidance, TWINKL Education provides a structured, innovative, and student-centered learning environment, empowering learners to achieve their full potential and succeed in a global academic landscape.'
     },
     {
       name: 'Ms. Soumaya Oualha',
       role: 'Founder, Owner of TWINKL',
-      image: '../assets/img/team/soumaya_photo.jpg',
+      image: '/img/team/soumaya_photo.jpg',
       specialization: 'French Teacher',
       description: `Mrs. Soumaya Oualha is the Founder and the Owner of TWINKL organization and a highly experienced French teacher. 
       She is dedicated to fostering academic excellence and cultural understanding, providing students with personalized guidance and effective language instruction. 
@@ -28,7 +28,7 @@ export const TeamPage = () => {
     {
       name: 'Mr. Salim Brahim',
       role: 'Teacher',
-      image: '../assets/img/team/salim_photo.jpg',
+      image: '/img/team/salim_photo.jpg',
       specialization: 'ICT Teacher',
       description: `Mr. Salim Brahim is a highly qualified Software Engineer and ICT Teacher with over three years of experience in developing and maintaining enterprise-level web applications. 
       He holds a National Engineering Diploma in Computer Engineering from ESPRIT, obtained in 2022. 
@@ -38,7 +38,7 @@ export const TeamPage = () => {
     {
       name: 'Ms. Rim Hana',
       role: 'Teacher',
-      image: '../assets/img/team/rim_photo.jpg',
+      image: '/img/team/rim_photo.jpg',
       specialization: 'English Teacher',
       description: `Ms. Rim Hana is a professional English teacher and translator with expertise in language instruction and intercultural communication. 
       She holds a Master’s Degree in Translation and Interpreting from the Higher Institute of Human Sciences of Tunis and a Bachelor’s Degree in English Language, Literature, and Civilization from the Faculty of Human and Social Sciences of Tunis. 
@@ -47,14 +47,14 @@ export const TeamPage = () => {
     {
       name: 'Mr. Achref Ben Brahim',
       role: 'Teacher',
-      image: '../assets/img/team/achref_photo.jpg',
+      image: '/img/team/achref_photo.jpg',
       specialization: 'Mathemathics Teacher',
       description: `Mr Achref is an engineer and computer science educator with international experience. He teaches ICT, Mathematics, and Business Studies within the British Curriculum framework. With a background in digital inclusion and technical support, he bridges education and technology. Passionate about empowering youth, he promotes creative and responsible tech learning. Achref fosters innovation and critical thinking through engaging, student-centered teaching.`
     },
     {
       name: 'Ms. Salma ben Khalifa',
       role: 'Teacher',
-      image: '../assets/img/team/salma_photo.png',
+      image: '/img/team/salma_photo.png',
       specialization: 'Business Teacher',
       description: `Ms. Salma Ben Khelifa brings strong experience in business development, strategic communication, and organizational leadership. She has served in business-focused roles at both national and international levels, including Business Development Responsible positions at AIESEC and Artiphany, where she managed partnerships, supported talent development, and led training programs in leadership and professional skills. Ms. Ben Khelifa has also worked as Public Relations Manager at iWatch and Events Coordinator at Mdinti, gaining valuable experience in stakeholder management, project coordination, and event strategy. Her professional background in entrepreneurship and youth-centered initiatives allows her to connect business theory with practical, real-world application, inspiring students to develop creativity, leadership, and a global business mindset.`
     },
