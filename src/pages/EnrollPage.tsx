@@ -2,6 +2,7 @@ import { CheckCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { EnrollmentApplicationForm } from '../components/EnrollmentApplicationForm';
+import { motion } from 'framer-motion';
 
 export const EnrollPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -32,10 +33,23 @@ export const EnrollPage = () => {
       setLoading(false);
     }
   };
+  const benefits = [
+    'Expert teachers with international credentials',
+    'Multiple curriculum options (Cambridge, IB, French, Tunisian, Canadian)',
+    'Small class sizes for personalized attention',
+    'Modern facilities and learning resources',
+    'Proven track record of academic excellence',
+    'Flexible scheduling options',
+    'Regular progress reports and parent communication',
+    'University preparation and guidance',
+  ];
   return (
     <div className="pt-20">
-      <section
+      <motion.section
         className="relative h-[400px] flex items-center justify-center overflow-hidden"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
         style={{
           backgroundImage:
             'url(https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1600)',
@@ -52,47 +66,56 @@ export const EnrollPage = () => {
             Start your journey to academic excellence
           </p>
         </div>
-      </section>
+      </motion.section>
 
       <section className="py-20 bg-white">
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-heading font-bold text-text-dark mb-6 tracking-heading">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.12 }
+                }
+              }}
+            >
+              <motion.h2 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-3xl font-heading font-bold text-text-dark mb-6 tracking-heading">
                 Why Choose TWINKL Education?
-              </h2>
-              <p className="text-lg font-body text-text-muted leading-relaxed mb-8">
+              </motion.h2>
+              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg font-body text-text-muted leading-relaxed mb-8">
                 Join a learning community committed to excellence, innovation, and personalized
                 education. Our proven track record of student success speaks for itself.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                {[
-                  'Expert teachers with international credentials',
-                  'Multiple curriculum options (Cambridge, IB, French, Tunisian, Canadian)',
-                  'Small class sizes for personalized attention',
-                  'Modern facilities and learning resources',
-                  'Proven track record of academic excellence',
-                  'Flexible scheduling options',
-                  'Regular progress reports and parent communication',
-                  'University preparation and guidance',
-                ].map((benefit, index) => (
-                  <div key={index} className="flex items-start space-x-3">
+              </motion.p>
+              <motion.div variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }} className="space-y-4 mb-8">
+                {benefits.map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}
+                    className="flex items-start space-x-3"
+                  >
                     <CheckCircle className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
                     <span className="font-body text-text-muted leading-relaxed">{benefit}</span>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
               <div className="bg-background-light p-8 rounded-xl">
                 <h2 className="text-2xl font-heading font-bold text-text-dark mb-6">
                   Enrollment Form
                 </h2>
                 <EnrollmentApplicationForm />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

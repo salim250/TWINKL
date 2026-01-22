@@ -6,6 +6,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeUp, staggerContainer } from '../helpers/animations';
 
 export const TeamPage = () => {
   const teamMembers = [
@@ -74,14 +76,19 @@ export const TeamPage = () => {
         }}
       >
         <div className="absolute inset-0 bg-primary/80"></div>
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-heading font-bold mb-4 tracking-heading">
+        <motion.div
+          className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-heading font-bold mb-4 tracking-heading">
             Meet Our Team
-          </h1>
-          <p className="text-xl font-body leading-relaxed">
+          </motion.h1>
+          <motion.p variants={fadeUp} className="text-xl font-body leading-relaxed">
             Experienced educators dedicated to student success
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </section>
 
       <section className="py-20 bg-white">
@@ -110,7 +117,14 @@ export const TeamPage = () => {
           >
             {teamMembers.map((member, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  whileHover={{ y: -8 }}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 h-full flex flex-col"
+                >
 
                   <div className="relative h-64 bg-gray-200">
                     <img
@@ -141,14 +155,25 @@ export const TeamPage = () => {
                     </button>
                   </div>
 
-                </div>
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
 
           {selectedMember && (
-            <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center px-4">
-              <div className="bg-white rounded-2xl max-w-lg w-full p-8 relative">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center px-4"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.25 }}
+                className="bg-white rounded-2xl max-w-lg w-full p-8 relative"
+              >
 
                 <button
                   className="absolute top-4 right-4 text-gray-400 hover:text-gray-700"
@@ -176,8 +201,8 @@ export const TeamPage = () => {
                   {selectedMember.description}
                 </p>
 
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           )}
 
           <br />
@@ -189,8 +214,14 @@ export const TeamPage = () => {
             <h2 className="text-3xl font-heading font-bold text-text-dark mb-8 text-center tracking-heading">
               Why Our Team Stands Out
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid md:grid-cols-3 gap-8"
+            >
+              <motion.div variants={fadeUp} className="text-center">
                 <div className="text-secondary mb-4 flex justify-center">
                   <Award className="w-12 h-12" />
                 </div>
@@ -200,8 +231,8 @@ export const TeamPage = () => {
                 <p className="font-body text-text-muted leading-relaxed">
                   Advanced degrees and certifications in their respective fields
                 </p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div variants={fadeUp} className="text-center">
                 <div className="text-secondary mb-4 flex justify-center">
                   <BookOpen className="w-12 h-12" />
                 </div>
@@ -211,8 +242,8 @@ export const TeamPage = () => {
                 <p className="font-body text-text-muted leading-relaxed">
                   Deep expertise in international curricula and examination systems
                 </p>
-              </div>
-              <div className="text-center">
+              </motion.div>
+              <motion.div variants={fadeUp} className="text-center">
                 <div className="text-secondary mb-4 flex justify-center">
                   <Globe className="w-12 h-12" />
                 </div>
@@ -222,8 +253,8 @@ export const TeamPage = () => {
                 <p className="font-body text-text-muted leading-relaxed">
                   International teaching experience across diverse educational contexts
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>

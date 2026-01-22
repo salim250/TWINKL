@@ -21,32 +21,25 @@ export const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.facebook.com/Twinkleducation"
                 className="text-white/80 hover:text-secondary transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/twinkleducation"
                 className="text-white/80 hover:text-secondary transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/twinkl-education-a799a238a/"
                 className="text-white/80 hover:text-secondary transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-white/80 hover:text-secondary transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
