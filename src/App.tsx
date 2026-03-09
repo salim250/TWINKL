@@ -1,4 +1,5 @@
 import { NavigationProvider, useNavigation } from './context/NavigationContext';
+import { TranslationProvider } from './context/TranslationContext';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -47,15 +48,17 @@ function PageRouter() {
 
 function App() {
   return (
-    <NavigationProvider>
-      <div className="min-h-screen bg-white font-body">
-        <Navigation />
-        <main>
-          <PageRouter />
-        </main>
-        <Footer />
-      </div>
-    </NavigationProvider>
+    <TranslationProvider>
+      <NavigationProvider>
+        <div className="min-h-screen bg-white font-body">
+          <Navigation />
+          <main>
+            <PageRouter />
+          </main>
+          <Footer />
+        </div>
+      </NavigationProvider>
+    </TranslationProvider>
   );
 }
 

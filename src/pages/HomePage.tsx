@@ -1,67 +1,68 @@
 import { BookOpen, GraduationCap, Globe, Users, Award, ArrowRight } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import { useTranslation } from '../context/TranslationContext';
 import { motion } from 'framer-motion';
 
 export const HomePage = () => {
   const { setCurrentPage } = useNavigation();
+  const { t } = useTranslation();
 
   const subjects = [
     {
       icon: <BookOpen className="w-12 h-12" />,
-      title: 'Sciences',
-      description: 'Biology, Chemistry, Physics, Coordinated/Combined Science',
+      title: t('home.subjects.sciences'),
+      description: t('home.subjects.sciences.desc'),
     },
     {
       icon: <GraduationCap className="w-12 h-12" />,
-      title: 'Mathematics',
-      description: 'Mathematics (Core and Extended), Further Mathematics, Applied Mathematics',
+      title: t('home.subjects.math'),
+      description: t('home.subjects.math.desc'),
     },
     {
       icon: <Globe className="w-12 h-12" />,
-      title: 'Languages',
-      description: 'English (Reading, Writing, Speaking), French, Arabic, Other foreign languages (optional)',
+      title: t('home.subjects.languages'),
+      description: t('home.subjects.languages.desc'),
     },
     {
       icon: <Users className="w-12 h-12" />,
-      title: 'Humanities & Social Sciences',
-      description: 'History, Geography, Economics, Global Perspectives, Business Studies',
+      title: t('home.subjects.humanities'),
+      description: t('home.subjects.humanities.desc'),
     },
     {
       icon: <Award className="w-12 h-12" />,
-      title: 'Arts & Creative Subjects',
-      description: 'Art & Design, Music, Drama, ICT',
+      title: t('home.subjects.arts'),
+      description: t('home.subjects.arts.desc'),
     },
   ];
 
   const programs = [
     {
-      title: 'Cambridge International',
-      description:
-        'World-class international education with globally recognized qualifications',
+      title: t('home.programs.cambridge.title'),
+      description: t('home.programs.cambridge.desc'),
       image: '/img/cambridge.jpg',
       page: 'cambridge' as const,
     },
     {
-      title: 'International Baccalaureate',
-      description: 'Comprehensive IB programs fostering critical thinking and global citizenship',
+      title: t('home.programs.ib.title'),
+      description: t('home.programs.ib.desc'),
       image: '/img/internationalBac.png',
       page: 'ib' as const,
     },
     {
-      title: 'French System',
-      description: 'Excellence in French education following the national curriculum',
+      title: t('home.programs.french.title'),
+      description: t('home.programs.french.desc'),
       image: '/img/french.jpg',
       page: 'french' as const,
     },
     {
-      title: 'Tunisian System',
-      description: 'Quality education aligned with Tunisian national standards',
+      title: t('home.programs.tunisian.title'),
+      description: t('home.programs.tunisian.desc'),
       image: '/img/tunisian.jpg',
       page: 'tunisian' as const,
     },
     {
-      title: 'Canadian System',
-      description: 'Innovative Canadian curriculum promoting inquiry-based learning',
+      title: t('home.programs.canadian.title'),
+      description: t('home.programs.canadian.desc'),
       image: '/img/canadian.png',
       page: 'canadian' as const,
     },
@@ -109,24 +110,24 @@ export const HomePage = () => {
           className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto"
         >
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 tracking-heading">
-            Welcome to TWINKL Education!
+            {t('home.hero.title')}
           </h1>
           <p className="text-xl md:text-2xl font-body mb-8 leading-relaxed">
-            We inspire young learners to achieve academic excellence through personalized teaching and a nurturing environment.
+            {t('home.hero.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => handleNavigate('enroll')}
               className="bg-secondary text-white px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105 inline-flex items-center justify-center"
             >
-              Enroll Today
+              {t('home.hero.enrollToday')}
               <ArrowRight className="ml-2 w-5 h-5" />
             </button>
             <button
               onClick={() => handleNavigate('about')}
               className="bg-white text-primary px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105"
             >
-              Learn More
+              {t('home.hero.learnMore')}
             </button>
           </div>
         </motion.div>
@@ -143,19 +144,19 @@ export const HomePage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-heading font-bold text-text-dark mb-6 tracking-heading">
-                About TWINKL Education
+                {t('home.about.title')}
               </h2>
               <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-                TWINKL Education, part of TWINKL, is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.
+                {t('home.about.description1')}
               </p>
               <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-                We provide high-quality education through personalized teaching, innovative programs, and a supportive environment, preparing every learner for academic success and lifelong growth.
+                {t('home.about.description2')}
               </p>
               <button
                 onClick={() => handleNavigate('about')}
                 className="text-secondary font-body font-semibold inline-flex items-center hover:gap-2 transition-all"
               >
-                Discover Our Story
+                {t('home.about.discoverStory')}
                 <ArrowRight className="ml-1 w-5 h-5" />
               </button>
             </div>
@@ -174,10 +175,10 @@ export const HomePage = () => {
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-heading font-bold text-text-dark mb-4 tracking-heading">
-              Subjects We Teach
+              {t('home.subjects.title')}
             </h2>
             <p className="text-lg font-body text-text-muted max-w-2xl mx-auto leading-relaxed">
-              Comprehensive academic support across all major subject areas
+              {t('home.subjects.subtitle')}
             </p>
           </div>
           <motion.div
@@ -187,14 +188,12 @@ export const HomePage = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-
             {subjects.map((subject, index) => (
               <motion.div
                 key={index}
                 variants={fadeUp}
                 className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
               >
-
                 <div className="text-secondary mb-4 group-hover:scale-110 transition-transform">
                   {subject.icon}
                 </div>
@@ -218,10 +217,10 @@ export const HomePage = () => {
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-heading font-bold text-text-dark mb-4 tracking-heading">
-              Our Educational Programs
+              {t('home.programs.title')}
             </h2>
             <p className="text-lg font-body text-text-muted max-w-2xl mx-auto leading-relaxed">
-              Choose from internationally recognized curricula tailored to your educational goals
+              {t('home.programs.subtitle')}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -249,7 +248,7 @@ export const HomePage = () => {
                     {program.description}
                   </p>
                   <span className="text-secondary font-body font-semibold inline-flex items-center group-hover:gap-2 transition-all">
-                    Learn More
+                    {t('home.programs.learnMore')}
                     <ArrowRight className="ml-1 w-4 h-4" />
                   </span>
                 </div>
@@ -268,17 +267,16 @@ export const HomePage = () => {
       >
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-heading font-bold mb-6 tracking-heading">
-            Ready to Start Your Learning Journey?
+            {t('home.cta.title')}
           </h2>
           <p className="text-xl font-body mb-8 max-w-2xl mx-auto leading-relaxed">
-            Join TWINKL Education today and experience personalized, world-class education that
-            empowers you to achieve your academic goals.
+            {t('home.cta.subtitle')}
           </p>
           <button
             onClick={() => handleNavigate('enroll')}
             className="bg-white text-primary px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 inline-flex items-center"
           >
-            Enroll Now
+            {t('home.cta.enrollNow')}
             <ArrowRight className="ml-2 w-5 h-5" />
           </button>
         </div>

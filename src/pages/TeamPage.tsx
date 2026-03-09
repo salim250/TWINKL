@@ -8,15 +8,18 @@ import 'swiper/css/pagination';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeUp, staggerContainer } from '../helpers/animations';
+import { useTranslation } from '../context/TranslationContext';
 
 export const TeamPage = () => {
+  const { t } = useTranslation();
+  
   const teamMembers = [
     {
       name: 'Dr. Cyrine Belhadj',
       role: 'CEO/Founder of TWINKL Education',
       image: '/img/team/cyrine_photo.jpg',
       specialization: 'Biochemistry Teacher',
-      description: 'Dr. Cyrine Belhadj, Founder & CEO of TWINKL Education, is a highly qualified engineer and  university educator with over 10 years of experience in teaching and educational leadership. She is a Certified Cambridge Teacher specializing in Science, committed to fostering academic excellence and holistic development in students. Under her guidance, TWINKL Education provides a structured, innovative, and student-centered learning environment, empowering learners to achieve their full potential and succeed in a global academic landscape.'
+      description: 'Dr. Cyrine Belhadj, Founder & CEO of TWINKL Education, is a highly qualified engineer and university educator with over 10 years of experience in teaching and educational leadership. She is a Certified Cambridge Teacher specializing in Science, committed to fostering academic excellence and holistic development in students. Under her guidance, TWINKL Education provides a structured, innovative, and student-centered learning environment, empowering learners to achieve their full potential and succeed in a global academic landscape.'
     },
     {
       name: 'Ms. Soumaya Oualha',
@@ -43,8 +46,8 @@ export const TeamPage = () => {
       image: '/img/team/rim_photo.jpg',
       specialization: 'English Teacher',
       description: `Ms. Rim Hana is a professional English teacher and translator with expertise in language instruction and intercultural communication. 
-      She holds a Master’s Degree in Translation and Interpreting from the Higher Institute of Human Sciences of Tunis and a Bachelor’s Degree in English Language, Literature, and Civilization from the Faculty of Human and Social Sciences of Tunis. 
-      Ms. Bechraoui has taught in several international institutions. She designs interactive, learner-focused lessons aligned with the Cambridge curriculum, integrating digital tools and modern teaching strategies to enhance students’ language proficiency and confidence.`
+      She holds a Master's Degree in Translation and Interpreting from the Higher Institute of Human Sciences of Tunis and a Bachelor's Degree in English Language, Literature, and Civilization from the Faculty of Human and Social Sciences of Tunis. 
+      Ms. Bechraoui has taught in several international institutions. She designs interactive, learner-focused lessons aligned with the Cambridge curriculum, integrating digital tools and modern teaching strategies to enhance students' language proficiency and confidence.`
     },
     {
       name: 'Mr. Achref Ben Brahim',
@@ -83,10 +86,10 @@ export const TeamPage = () => {
           variants={staggerContainer}
         >
           <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-heading font-bold mb-4 tracking-heading">
-            Meet Our Team
+            {t('team.hero.title')}
           </motion.h1>
           <motion.p variants={fadeUp} className="text-xl font-body leading-relaxed">
-            Experienced educators dedicated to student success
+            {t('team.hero.subtitle')}
           </motion.p>
         </motion.div>
       </section>
@@ -95,12 +98,10 @@ export const TeamPage = () => {
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-heading font-bold text-text-dark mb-6 tracking-heading">
-              Our Expert Educators
+              {t('team.experts.title')}
             </h2>
             <p className="text-lg font-body text-text-muted max-w-3xl mx-auto leading-relaxed">
-              Our team comprises highly qualified educators with extensive experience in
-              international curricula. Each member brings passion, expertise, and a commitment to
-              nurturing student potential.
+              {t('team.experts.subtitle')}
             </p>
           </div>
 
@@ -125,7 +126,6 @@ export const TeamPage = () => {
                   whileHover={{ y: -8 }}
                   className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 h-full flex flex-col"
                 >
-
                   <div className="relative h-64 bg-gray-200">
                     <img
                       src={member.image}
@@ -151,10 +151,9 @@ export const TeamPage = () => {
                       className="mt-3 text-secondary text-sm font-medium hover:underline"
                       onClick={() => setSelectedMember(member)}
                     >
-                      Read more
+                      {t('team.member.readmore')}
                     </button>
                   </div>
-
                 </motion.div>
               </SwiperSlide>
             ))}
@@ -174,7 +173,6 @@ export const TeamPage = () => {
                 transition={{ duration: 0.25 }}
                 className="bg-white rounded-2xl max-w-lg w-full p-8 relative"
               >
-
                 <button
                   className="absolute top-4 right-4 text-gray-400 hover:text-gray-700"
                   onClick={() => setSelectedMember(null)}
@@ -200,7 +198,6 @@ export const TeamPage = () => {
                 <p className="text-text-muted leading-relaxed">
                   {selectedMember.description}
                 </p>
-
               </motion.div>
             </motion.div>
           )}
@@ -209,10 +206,9 @@ export const TeamPage = () => {
           <br />
           <br />
 
-
           <div className="bg-background-light rounded-2xl p-8 md:p-12">
             <h2 className="text-3xl font-heading font-bold text-text-dark mb-8 text-center tracking-heading">
-              Why Our Team Stands Out
+              {t('team.standout.title')}
             </h2>
             <motion.div
               initial="hidden"
@@ -226,10 +222,10 @@ export const TeamPage = () => {
                   <Award className="w-12 h-12" />
                 </div>
                 <h3 className="text-xl font-heading font-bold text-text-dark mb-3">
-                  Qualified Experts
+                  {t('team.standout.qualified')}
                 </h3>
                 <p className="font-body text-text-muted leading-relaxed">
-                  Advanced degrees and certifications in their respective fields
+                  {t('team.standout.qualified.desc')}
                 </p>
               </motion.div>
               <motion.div variants={fadeUp} className="text-center">
@@ -237,10 +233,10 @@ export const TeamPage = () => {
                   <BookOpen className="w-12 h-12" />
                 </div>
                 <h3 className="text-xl font-heading font-bold text-text-dark mb-3">
-                  Curriculum Specialists
+                  {t('team.standout.curriculum')}
                 </h3>
                 <p className="font-body text-text-muted leading-relaxed">
-                  Deep expertise in international curricula and examination systems
+                  {t('team.standout.curriculum.desc')}
                 </p>
               </motion.div>
               <motion.div variants={fadeUp} className="text-center">
@@ -248,10 +244,10 @@ export const TeamPage = () => {
                   <Globe className="w-12 h-12" />
                 </div>
                 <h3 className="text-xl font-heading font-bold text-text-dark mb-3">
-                  Global Experience
+                  {t('team.standout.global')}
                 </h3>
                 <p className="font-body text-text-muted leading-relaxed">
-                  International teaching experience across diverse educational contexts
+                  {t('team.standout.global.desc')}
                 </p>
               </motion.div>
             </motion.div>

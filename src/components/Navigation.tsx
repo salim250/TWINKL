@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, Globe } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import { useTranslation } from '../context/Translationcontext';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { currentPage, setCurrentPage } = useNavigation();
+  const { language, setLanguage, t } = useTranslation();
   const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,24 +22,23 @@ export const Navigation = () => {
   }, []);
 
   const menuItems = [
-    { label: 'Accueil', page: 'home' as const },
+    { label: t('nav.home'), page: 'home' as const },
 
     {
-      label: 'Systems',
+      label: t('nav.systems'),
       children: [
-        { label: 'Cambridge', page: 'cambridge' as const },
-        { label: 'International Baccalaureate', page: 'ib' as const },
-        { label: 'Tunisian System', page: 'tunisian' as const },
-        { label: 'French System', page: 'french' as const },
-        { label: 'Canadian System', page: 'canadian' as const },
+        { label: t('systems.cambridge'), page: 'cambridge' as const },
+        { label: t('systems.ib'), page: 'ib' as const },
+        { label: t('systems.tunisian'), page: 'tunisian' as const },
+        { label: t('systems.french'), page: 'french' as const },
+        { label: t('systems.canadian'), page: 'canadian' as const },
       ],
     },
 
-    { label: 'About Us', page: 'about' as const },
-    { label: 'Meet Our Team', page: 'team' as const },
-    { label: 'Career', page: 'career' as const },
+    { label: t('nav.about'), page: 'about' as const },
+    { label: t('nav.team'), page: 'team' as const },
+    { label: t('nav.career'), page: 'career' as const },
   ];
-
 
   const handleNavigate = (page: typeof menuItems[0]['page']) => {
     setCurrentPage(page);
@@ -43,10 +46,16 @@ export const Navigation = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleLanguageChange = (lang: 'fr' | 'en') => {
+    setLanguage(lang);
+    setIsLangMenuOpen(false);
+  };
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+      }`}
     >
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -59,7 +68,6 @@ export const Navigation = () => {
               TWINKL Education
             </span>
           </div>
-
 
           <div className="hidden xl:flex items-center space-x-6">
             {menuItems.map((item) =>
@@ -74,7 +82,7 @@ export const Navigation = () => {
                       <button
                         key={child.page}
                         onClick={() => handleNavigate(child.page)}
-                        className="block w-full text-left px-5 py-3 text-sm hover:bg-gray-100 transition-colors"
+                        className="block w-full text-left px-5 py-3 text-sm hover:bg-gray-100 transition-colors first:rounded-t-lg last:rounded-b-lg"
                       >
                         {child.label}
                       </button>
@@ -85,20 +93,25 @@ export const Navigation = () => {
                 <button
                   key={item.page}
                   onClick={() => handleNavigate(item.page)}
-                  className={`text-sm font-body uppercase tracking-wider transition-colors ${currentPage === item.page
-                    ? 'text-secondary font-semibold'
-                    : 'text-text-dark hover:text-secondary'
-                    }`}
+                  className={`text-sm font-body uppercase tracking-wider transition-colors ${
+                    currentPage === item.page
+                      ? 'text-secondary font-semibold'
+                      : 'text-text-dark hover:text-secondary'
+                  }`}
                 >
                   {item.label}
                 </button>
               )
             )}
+
+            {/* Language Selector - Desktop */}
+            <LanguageSwitcher />
+
             <button
               onClick={() => handleNavigate('enroll')}
               className="bg-secondary text-white px-6 py-2.5 rounded-lg font-body font-medium hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105"
             >
-              Enroll Now
+              {t('nav.enrollNow')}
             </button>
           </div>
 
@@ -153,11 +166,15 @@ export const Navigation = () => {
                 </button>
               )
             )}
+
+            {/* Language Selector - Mobile */}
+            <LanguageSwitcher />
+
             <button
               onClick={() => handleNavigate('enroll')}
               className="w-full bg-secondary text-white px-6 py-2.5 rounded-lg font-body font-medium hover:bg-secondary/90 transition-colors"
             >
-              Enroll Now
+              {t('nav.enrollNow')}
             </button>
           </div>
         </div>

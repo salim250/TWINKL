@@ -1,27 +1,30 @@
 import { motion } from 'framer-motion';
 import { Target, Heart, Users, Award } from 'lucide-react';
+import { useTranslation } from '../context/TranslationContext';
 
 export const AboutPage = () => {
+  const { t } = useTranslation();
+
   const values = [
     {
       icon: <Target className="w-12 h-12" />,
-      title: 'Excellence',
-      description: 'We strive for the highest standards in education and student achievement',
+      title: t('about.values.excellence'),
+      description: t('about.values.excellence.desc'),
     },
     {
       icon: <Heart className="w-12 h-12" />,
-      title: 'Care',
-      description: 'We create a supportive environment where every student feels valued',
+      title: t('about.values.care'),
+      description: t('about.values.care.desc'),
     },
     {
       icon: <Users className="w-12 h-12" />,
-      title: 'Collaboration',
-      description: 'We work together with students, parents, and educators for success',
+      title: t('about.values.collaboration'),
+      description: t('about.values.collaboration.desc'),
     },
     {
       icon: <Award className="w-12 h-12" />,
-      title: 'Innovation',
-      description: 'We embrace modern teaching methods and educational technology',
+      title: t('about.values.innovation'),
+      description: t('about.values.innovation.desc'),
     },
   ];
 
@@ -62,10 +65,10 @@ export const AboutPage = () => {
           className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto"
         >
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-4 tracking-heading">
-            About TWINKL Education
+            {t('about.hero.title')}
           </h1>
           <p className="text-xl font-body leading-relaxed">
-            Nurturing excellence through personalized education
+            {t('about.hero.subtitle')}
           </p>
         </motion.div>
       </section>
@@ -81,13 +84,13 @@ export const AboutPage = () => {
           >
             <motion.div variants={fadeUp}>
               <h2 className="text-4xl font-heading font-bold text-text-dark mb-6 tracking-heading">
-                Our Story
+                {t('about.story.title')}
               </h2>
               <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-                TWINKL Education, part of TWINKL, is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.
+                {t('about.story.description1')}
               </p>
               <p className="text-lg font-body text-text-muted leading-relaxed">
-                We provide high-quality education through personalized teaching, innovative programs, and a supportive environment, preparing every learner for academic success and lifelong growth.
+                {t('about.story.description2')}
               </p>
             </motion.div>
             <motion.div
@@ -114,7 +117,7 @@ export const AboutPage = () => {
               variants={fadeUp}
               className="text-4xl font-heading font-bold text-text-dark mb-12 text-center tracking-heading"
             >
-              Our Values
+              {t('about.values.title')}
             </motion.h2>
             <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {values.map((value, index) => (
@@ -156,18 +159,13 @@ export const AboutPage = () => {
             </motion.div>
             <motion.div variants={fadeUp} className="order-1 md:order-2">
               <h2 className="text-4xl font-heading font-bold text-text-dark mb-6 tracking-heading">
-                Our Approach
+                {t('about.approach.title')}
               </h2>
               <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-                At TWINKL Education, we believe in a holistic approach to learning that addresses
-                both academic excellence and personal development. Our experienced educators employ
-                innovative teaching methods tailored to each student's unique learning style.
+                {t('about.approach.description1')}
               </p>
               <p className="text-lg font-body text-text-muted leading-relaxed">
-                We offer comprehensive support across multiple international curricula, ensuring
-                that students receive authentic instruction aligned with their chosen educational
-                pathway. From Cambridge International to IB, French, Tunisian, and Canadian
-                systems, we provide expert guidance every step of the way.
+                {t('about.approach.description2')}
               </p>
             </motion.div>
           </motion.div>

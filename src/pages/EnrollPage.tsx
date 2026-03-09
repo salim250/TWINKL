@@ -1,10 +1,11 @@
 import { CheckCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { EnrollmentApplicationForm } from '../components/EnrollmentApplicationForm';
 import { motion } from 'framer-motion';
+import { useTranslation } from '../context/TranslationContext';
 
 export const EnrollPage = () => {
+  const { t } = useTranslation();
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
 
@@ -33,16 +34,18 @@ export const EnrollPage = () => {
       setLoading(false);
     }
   };
+
   const benefits = [
-    'Expert teachers with international credentials',
-    'Multiple curriculum options (Cambridge, IB, French, Tunisian, Canadian)',
-    'Small class sizes for personalized attention',
-    'Modern facilities and learning resources',
-    'Proven track record of academic excellence',
-    'Flexible scheduling options',
-    'Regular progress reports and parent communication',
-    'University preparation and guidance',
+    t('enroll.benefits.1'),
+    t('enroll.benefits.2'),
+    t('enroll.benefits.3'),
+    t('enroll.benefits.4'),
+    t('enroll.benefits.5'),
+    t('enroll.benefits.6'),
+    t('enroll.benefits.7'),
+    t('enroll.benefits.8'),
   ];
+
   return (
     <div className="pt-20">
       <motion.section
@@ -60,10 +63,10 @@ export const EnrollPage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-90"></div>
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-4 tracking-heading">
-            Enroll Today
+            {t('enroll.hero.title')}
           </h1>
           <p className="text-xl font-body leading-relaxed">
-            Start your journey to academic excellence
+            {t('enroll.hero.subtitle')}
           </p>
         </div>
       </motion.section>
@@ -82,14 +85,22 @@ export const EnrollPage = () => {
                 }
               }}
             >
-              <motion.h2 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-3xl font-heading font-bold text-text-dark mb-6 tracking-heading">
-                Why Choose TWINKL Education?
+              <motion.h2
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                className="text-3xl font-heading font-bold text-text-dark mb-6 tracking-heading"
+              >
+                {t('enroll.why.title')}
               </motion.h2>
-              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg font-body text-text-muted leading-relaxed mb-8">
-                Join a learning community committed to excellence, innovation, and personalized
-                education. Our proven track record of student success speaks for itself.
+              <motion.p
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                className="text-lg font-body text-text-muted leading-relaxed mb-8"
+              >
+                {t('enroll.why.subtitle')}
               </motion.p>
-              <motion.div variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }} className="space-y-4 mb-8">
+              <motion.div
+                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
+                className="space-y-4 mb-8"
+              >
                 {benefits.map((benefit, index) => (
                   <motion.div
                     key={index}
@@ -111,9 +122,21 @@ export const EnrollPage = () => {
             >
               <div className="bg-background-light p-8 rounded-xl">
                 <h2 className="text-2xl font-heading font-bold text-text-dark mb-6">
-                  Enrollment Form
+                  {t('enroll.application.title')}
                 </h2>
-                <EnrollmentApplicationForm />
+
+                <p className="text-text-muted font-body leading-relaxed mb-6">
+                  {t('enroll.application.description')}
+                </p>
+
+                <a
+                  href="https://forms.gle/qzp2sbvmwrxw5Pqf6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-secondary text-white px-6 py-2.5 rounded-lg font-body font-medium hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105"
+                >
+                  {t('enroll.application.button')}
+                </a>
               </div>
             </motion.div>
           </div>

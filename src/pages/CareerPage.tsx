@@ -1,35 +1,37 @@
-import { CheckCircle, Briefcase, Heart, TrendingUp } from 'lucide-react';
+import { CheckCircle, Briefcase, Heart, TrendingUp, Mail } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { CareerApplicationForm } from '../components/CareerApplicationForm';
 import { fadeUp, staggerContainer } from '../helpers/animations';
 import { motion } from 'framer-motion';
+import { useTranslation } from '../context/TranslationContext';
 
 export const CareerPage = () => {
+  const { t } = useTranslation();
   const [showApplicationForm, setShowApplicationForm] = useState(false);
   const applicationRef = useRef<HTMLDivElement | null>(null);
 
   const requirements = [
-    'Bachelor\'s degree in the subject area (Master\'s preferred)',
-    'Teaching certification or proven experience',
-    'Strong communication and classroom management skills',
-    'Understanding of international education systems'
+    t('career.requirements.1'),
+    t('career.requirements.2'),
+    t('career.requirements.3'),
+    t('career.requirements.4'),
   ];
 
   const benefits = [
     {
       icon: <Briefcase className="w-8 h-8" />,
-      title: 'Professional Development',
-      description: 'Continuous training and growth opportunities',
+      title: t('career.benefits.professional'),
+      description: t('career.benefits.professional.desc'),
     },
     {
       icon: <Heart className="w-8 h-8" />,
-      title: 'Supportive Environment',
-      description: 'Collaborative team culture and resources',
+      title: t('career.benefits.environment'),
+      description: t('career.benefits.environment.desc'),
     },
     {
       icon: <TrendingUp className="w-8 h-8" />,
-      title: 'Competitive Package',
-      description: 'Attractive salary and benefits',
+      title: t('career.benefits.package'),
+      description: t('career.benefits.package.desc'),
     },
   ];
 
@@ -52,10 +54,10 @@ export const CareerPage = () => {
           variants={staggerContainer}
         >
           <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-heading font-bold mb-4 tracking-heading">
-            Join Our Team
+            {t('career.hero.title')}
           </motion.h1>
           <motion.p variants={fadeUp} className="text-xl font-body leading-relaxed">
-            Shape the future of education at TWINKL
+            {t('career.hero.subtitle')}
           </motion.p>
         </motion.div>
       </section>
@@ -70,12 +72,10 @@ export const CareerPage = () => {
             className="mb-16"
           >
             <motion.h2 variants={fadeUp} className="text-4xl font-heading font-bold text-text-dark mb-6 text-center tracking-heading">
-              Why Work With Us?
+              {t('career.why.title')}
             </motion.h2>
             <motion.p variants={fadeUp} className="text-lg font-body text-text-muted text-center max-w-3xl mx-auto leading-relaxed mb-12">
-              At TWINKL Education, we believe that great teachers deserve great support. Join a
-              team that values excellence, innovation, and the power of education to transform
-              lives.
+              {t('career.why.subtitle')}
             </motion.p>
             <div className="grid md:grid-cols-3 gap-8">
               {benefits.map((benefit, index) => (
@@ -103,7 +103,7 @@ export const CareerPage = () => {
           >
             <motion.div variants={fadeUp}>
               <h2 className="text-3xl font-heading font-bold text-text-dark mb-6 tracking-heading">
-                Requirements
+                {t('career.requirements.title')}
               </h2>
               <ul className="space-y-4">
                 {requirements.map((requirement, index) => (
@@ -135,7 +135,7 @@ export const CareerPage = () => {
             className="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 md:p-12 text-white"
           >
             <h2 className="text-3xl font-heading font-bold mb-6 text-center tracking-heading">
-              Application Process
+              {t('career.process.title')}
             </h2>
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               {[1, 2, 3].map((step) => (
@@ -144,21 +144,17 @@ export const CareerPage = () => {
                     <span className="text-2xl font-heading font-bold">{step}</span>
                   </div>
                   <h3 className="text-xl font-heading font-bold mb-2">
-                    {step === 1 ? 'Submit Application' : step === 2 ? 'Interview' : 'Join Us'}
+                    {t(`career.process.step${step}`)}
                   </h3>
                   <p className="font-body">
-                    {step === 1
-                      ? 'Send your CV and cover letter'
-                      : step === 2
-                        ? 'Meet with our education team'
-                        : 'Start your journey with TWINKL'}
+                    {t(`career.process.step${step}.desc`)}
                   </p>
                 </motion.div>
               ))}
             </div>
             <div className="text-center">
               <p className="font-body text-lg mb-6">
-                Ready to make a difference in students' lives?
+                {t('career.process.ready')}
               </p>
               <button
                 onClick={() => {
@@ -169,9 +165,8 @@ export const CareerPage = () => {
                 }}
                 className="bg-white text-primary px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-gray-100 transition-colors inline-block"
               >
-                Apply Now
+                {t('career.process.apply')}
               </button>
-
             </div>
           </motion.div>
 
@@ -179,17 +174,34 @@ export const CareerPage = () => {
 
           {showApplicationForm && (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mt-12 bg-white rounded-2xl p-8 md:p-10 text-text-dark max-w-3xl mx-auto"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="mt-12 bg-white rounded-2xl p-8 md:p-12 shadow-xl max-w-3xl mx-auto"
             >
-              <CareerApplicationForm />
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary/10 rounded-full mb-6">
+                  <Mail className="w-8 h-8 text-secondary" />
+                </div>
+                <h2 className="text-3xl font-heading font-bold text-text-dark mb-4 tracking-heading">
+                  {t('career.apply.title')}
+                </h2>
+                <p className="text-lg font-body text-text-muted mb-6">
+                  {t('career.apply.instruction')}
+                </p>
+                <a
+                  href="mailto:teducm@gmail.com"
+                  className="inline-flex items-center gap-2 bg-secondary text-white px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105"
+                >
+                  <Mail className="w-5 h-5" />
+                  {t('career.apply.email')}
+                </a>
+              </div>
             </motion.div>
           )}
-
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 };

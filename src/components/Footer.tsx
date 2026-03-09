@@ -1,8 +1,10 @@
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter, Timer } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
+import { useTranslation } from '../context/TranslationContext';
 
 export const Footer = () => {
   const { setCurrentPage } = useNavigation();
+  const { t } = useTranslation();
 
   const handleNavigate = (page: any) => {
     setCurrentPage(page);
@@ -14,10 +16,9 @@ export const Footer = () => {
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">About TWINKL</h3>
+            <h3 className="text-xl font-heading font-bold mb-4">{t('footer.about.title')}</h3>
             <p className="text-white/80 font-body leading-relaxed mb-4">
-              A dedicated tutoring and learning center committed to nurturing students through
-              personalized teaching and various international curricula.
+              {t('footer.about.description')}
             </p>
             <div className="flex space-x-4">
               <a
@@ -45,7 +46,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">Contact Info</h3>
+            <h3 className="text-xl font-heading font-bold mb-4">{t('footer.contact.title')}</h3>
             <div className="space-y-3 font-body">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
@@ -72,9 +73,9 @@ export const Footer = () => {
 
                 <div>
                   <p className="text-white font-medium leading-relaxed">
-                    Monday – Sunday
+                    {t('footer.contact.hours.days')}
                     <span className="block text-white/80">
-                      9:00 AM – 9:00 PM
+                      {t('footer.contact.hours.time')}
                     </span>
                   </p>
                 </div>
@@ -84,15 +85,15 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">Quick Links</h3>
+            <h3 className="text-xl font-heading font-bold mb-4">{t('footer.links.title')}</h3>
             <ul className="space-y-2 font-body">
               {[
-                { label: 'Home', page: 'home' },
-                { label: 'About Us', page: 'about' },
-                { label: 'Programs', page: 'home' },
-                { label: 'Meet Our Team', page: 'team' },
-                { label: 'Career', page: 'career' },
-                { label: 'Contact', page: 'contact' },
+                { label: t('footer.links.home'), page: 'home' },
+                { label: t('footer.links.about'), page: 'about' },
+                { label: t('footer.links.programs'), page: 'home' },
+                { label: t('footer.links.team'), page: 'team' },
+                { label: t('footer.links.career'), page: 'career' },
+                { label: t('footer.links.contact'), page: 'contact' },
               ].map((link) => (
                 <li key={link.page}>
                   <button
@@ -107,10 +108,10 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">Our Location</h3>
+            <h3 className="text-xl font-heading font-bold mb-4">{t('footer.location.title')}</h3>
             <div className="bg-white/10 rounded-lg overflow-hidden h-48">
               <iframe
-                src="https://www.google.com/maps?q=36.84783326804408,10.17257186818187&z=15&output=embed"
+                src="https://www.google.com/maps?q=36.8476523390942,10.172592760862017&z=15&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -125,7 +126,7 @@ export const Footer = () => {
 
         <div className="border-t border-white/20 pt-8 text-center">
           <p className="text-white/80 font-body">
-            &copy; {new Date().getFullYear()} TWINKL Education. All rights reserved.
+            &copy; {new Date().getFullYear()} {t('footer.copyright')}
           </p>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import { BookOpen, Target, Award } from 'lucide-react';
 import { SystemPageLayout } from '../components/SystemPageLayout';
+import { useTranslation } from '../context/TranslationContext';
 
 export const CambridgePage = () => {
+  const { t } = useTranslation();
+
   const levels = [
     {
       title: 'Primary',
@@ -22,23 +25,23 @@ export const CambridgePage = () => {
 
   return (
     <SystemPageLayout
-      title="Cambridge International"
-      subtitle="World-class international education with globally recognized qualifications"
+      title={t('cambridge.title')}
+      subtitle={t('cambridge.subtitle')}
       heroImage="/img/cambridge_school.jpg"
       sideImage="/img/cambridge_flayer.jpg"
       content={
         <>
           <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-            At TWINKL Education, we follow the Cambridge International curriculum, a globally recognized program designed to develop confident, responsible, and independent learners.
+            {t('cambridge.content.p1')}
           </p>
           <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-            The curriculum emphasizes critical thinking, creativity, and practical problem-solving, preparing students for academic success and future opportunities worldwide.
+            {t('cambridge.content.p2')}
           </p>
           <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-            Our Cambridge programs offer structured learning pathways, from Primary (Cambridge Primary) to Secondary (IGCSE) and Advanced (AS & A Levels), ensuring a seamless academic journey.
+            {t('cambridge.content.p3')}
           </p>
           <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-            With personalized guidance and supportive teaching, we help every student achieve their full potential while fostering a love for learning.
+            {t('cambridge.content.p4')}
           </p>
         </>
       }

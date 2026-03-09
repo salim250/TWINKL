@@ -1,22 +1,25 @@
-import { SystemPageLayout } from "../components/SystemPageLayout";
+import { SystemPageLayout } from '../components/SystemPageLayout';
+import { useTranslation } from '../context/TranslationContext';
 
 export const CanadianSystemPage = () => {
+  const { t } = useTranslation();
+
   return (
     <SystemPageLayout
-      title="Canadian System"
-      subtitle="Innovative Canadian curriculum promoting inquiry-based learning"
+      title={t('canadian.title')}
+      subtitle={t('canadian.subtitle')}
       heroImage="/img/canadian_school.jpg"
       sideImage="/img/canadian_flayer.jpg"
       content={
         <>
           <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-            At TWINKL Education, we provide programs aligned with the Tunisian national curriculum, ensuring students gain a strong academic foundation while developing critical thinking and problem-solving skills.
+            {t('canadian.content.p1')}
           </p>
           <p className="text-lg font-body text-text-muted leading-relaxed mb-6">
-            Our approach emphasizes core subjects such as Mathematics, Sciences, Languages, and Humanities, preparing learners for national examinations and higher education opportunities.
+            {t('canadian.content.p2')}
           </p>
           <p className="text-lg font-body text-text-muted leading-relaxed">
-            We combine structured teaching with personalized support to help students excel academically, grow personally, and build the skills needed for future success.
+            {t('canadian.content.p3')}
           </p>
         </>
       }
