@@ -53,9 +53,8 @@ export const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+        }`}
     >
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -93,11 +92,10 @@ export const Navigation = () => {
                 <button
                   key={item.page}
                   onClick={() => handleNavigate(item.page)}
-                  className={`text-sm font-body uppercase tracking-wider transition-colors ${
-                    currentPage === item.page
+                  className={`text-sm font-body uppercase tracking-wider transition-colors ${currentPage === item.page
                       ? 'text-secondary font-semibold'
                       : 'text-text-dark hover:text-secondary'
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </button>
@@ -126,7 +124,7 @@ export const Navigation = () => {
 
       {isMobileMenuOpen && (
         <div className="xl:hidden bg-white border-t border-gray-200 shadow-lg">
-          <div className="px-4 py-4 space-y-3 max-h-[70vh] overflow-y-auto">
+          <div className="px-4 py-4 space-y-3 max-h-[70vh] overflow-visible">
             {menuItems.map((item) =>
               item.children ? (
                 <div key={item.label}>
@@ -168,7 +166,7 @@ export const Navigation = () => {
             )}
 
             {/* Language Selector - Mobile */}
-            <LanguageSwitcher />
+            <LanguageSwitcher isMobile={true} />
 
             <button
               onClick={() => handleNavigate('enroll')}

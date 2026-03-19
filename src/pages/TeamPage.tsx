@@ -12,58 +12,24 @@ import { useTranslation } from '../context/TranslationContext';
 
 export const TeamPage = () => {
   const { t } = useTranslation();
-  
+
   const teamMembers = [
-    {
-      name: 'Dr. Cyrine Belhadj',
-      role: 'CEO/Founder of TWINKL Education',
-      image: '/img/team/cyrine_photo.jpg',
-      specialization: 'Biochemistry Teacher',
-      description: 'Dr. Cyrine Belhadj, Founder & CEO of TWINKL Education, is a highly qualified engineer and university educator with over 10 years of experience in teaching and educational leadership. She is a Certified Cambridge Teacher specializing in Science, committed to fostering academic excellence and holistic development in students. Under her guidance, TWINKL Education provides a structured, innovative, and student-centered learning environment, empowering learners to achieve their full potential and succeed in a global academic landscape.'
-    },
-    {
-      name: 'Ms. Soumaya Oualha',
-      role: 'Founder, Owner of TWINKL',
-      image: '/img/team/soumaya_photo.jpg',
-      specialization: 'French Teacher',
-      description: `Mrs. Soumaya Oualha is the Founder and the Owner of TWINKL organization and a highly experienced French teacher. 
-      She is dedicated to fostering academic excellence and cultural understanding, providing students with personalized guidance and effective language instruction. 
-      Under her leadership, TWINKL Education promotes a student-centered, innovative learning environment, empowering learners to achieve their full potential.`
-    },
-    {
-      name: 'Mr. Salim Brahim',
-      role: 'Teacher',
-      image: '/img/team/salim_photo.jpg',
-      specialization: 'ICT Teacher',
-      description: `Mr. Salim Brahim is a highly qualified Software Engineer and ICT Teacher with over three years of experience in developing and maintaining enterprise-level web applications. 
-      He holds a National Engineering Diploma in Computer Engineering from ESPRIT, obtained in 2022. 
-      His expertise includes building robust and scalable solutions, system integration, automated testing, and ensuring quality and reliability. 
-      As a qualified ICT educator, he effectively delivers technology-based instruction and integrates digital tools into modern learning environments.`
-    },
-    {
-      name: 'Ms. Rim Hana',
-      role: 'Teacher',
-      image: '/img/team/rim_photo.jpg',
-      specialization: 'English Teacher',
-      description: `Ms. Rim Hana is a professional English teacher and translator with expertise in language instruction and intercultural communication. 
-      She holds a Master's Degree in Translation and Interpreting from the Higher Institute of Human Sciences of Tunis and a Bachelor's Degree in English Language, Literature, and Civilization from the Faculty of Human and Social Sciences of Tunis. 
-      Ms. Bechraoui has taught in several international institutions. She designs interactive, learner-focused lessons aligned with the Cambridge curriculum, integrating digital tools and modern teaching strategies to enhance students' language proficiency and confidence.`
-    },
-    {
-      name: 'Mr. Achref Ben Brahim',
-      role: 'Teacher',
-      image: '/img/team/achref_photo.jpg',
-      specialization: 'Mathemathics Teacher',
-      description: `Mr Achref is an engineer and computer science educator with international experience. He teaches ICT, Mathematics, and Business Studies within the British Curriculum framework. With a background in digital inclusion and technical support, he bridges education and technology. Passionate about empowering youth, he promotes creative and responsible tech learning. Achref fosters innovation and critical thinking through engaging, student-centered teaching.`
-    },
-    {
-      name: 'Ms. Salma ben Khalifa',
-      role: 'Teacher',
-      image: '/img/team/salma_photo.png',
-      specialization: 'Business Teacher',
-      description: `Ms. Salma Ben Khelifa brings strong experience in business development, strategic communication, and organizational leadership. She has served in business-focused roles at both national and international levels, including Business Development Responsible positions at AIESEC and Artiphany, where she managed partnerships, supported talent development, and led training programs in leadership and professional skills. Ms. Ben Khelifa has also worked as Public Relations Manager at iWatch and Events Coordinator at Mdinti, gaining valuable experience in stakeholder management, project coordination, and event strategy. Her professional background in entrepreneurship and youth-centered initiatives allows her to connect business theory with practical, real-world application, inspiring students to develop creativity, leadership, and a global business mindset.`
-    },
+    { id: 'cyrine', image: '/img/team/cyrine_photo.jpg' },
+    { id: 'soumaya', image: '/img/team/soumaya_photo.jpg' },
+    { id: 'salim', image: '/img/team/salim_photo.jpg' },
+    { id: 'rim', image: '/img/team/rim_photo.jpg' },
+    { id: 'achref', image: '/img/team/achref_photo.jpg' },
+    { id: 'salma', image: '/img/team/salma_photo.png' },
+    { id: 'mohamedsaadallah', image: '/img/team/mohamedsaadallah_photo.jpg' },
+    { id: 'mohamedhomsi', image: '/img/team/mohamedhomsi_photo.jpg' },
   ];
+
+  const getMemberText = (memberId: string) => ({
+    name: t(`team.${memberId}.name`),
+    role: t(`team.${memberId}.role`),
+    specialization: t(`team.${memberId}.specialization`),
+    description: t(`team.${memberId}.description`),
+  });
 
   const [selectedMember, setSelectedMember] = useState<any>(null);
 
@@ -106,6 +72,7 @@ export const TeamPage = () => {
           </div>
 
           <Swiper
+            dir={t('lang') === 'ar' ? 'rtl' : 'ltr'}
             modules={[Navigation, Pagination]}
             spaceBetween={32}
             navigation
@@ -116,47 +83,37 @@ export const TeamPage = () => {
               1024: { slidesPerView: 3 },
             }}
           >
-            {teamMembers.map((member, index) => (
-              <SwiperSlide key={index}>
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  whileHover={{ y: -8 }}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 h-full flex flex-col"
-                >
-                  <div className="relative h-64 bg-gray-200">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+            {teamMembers.map((member, index) => {
+              const text = getMemberText(member.id);
+              return (
+                <SwiperSlide key={index}>
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    whileHover={{ y: -8 }}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 h-full flex flex-col"
+                  >
+                    <div className="relative h-64 bg-gray-200">
+                      <img src={member.image} alt={text.name} className="w-full h-full object-cover" />
+                    </div>
 
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-xl font-heading font-bold text-text-dark mb-1">
-                      {member.name}
-                    </h3>
-
-                    <p className="text-secondary font-body font-semibold mb-2">
-                      {member.role}
-                    </p>
-
-                    <p className="text-sm text-text-muted mb-3">
-                      {member.specialization}
-                    </p>
-
-                    <button
-                      className="mt-3 text-secondary text-sm font-medium hover:underline"
-                      onClick={() => setSelectedMember(member)}
-                    >
-                      {t('team.member.readmore')}
-                    </button>
-                  </div>
-                </motion.div>
-              </SwiperSlide>
-            ))}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <h3 className="text-xl font-heading font-bold text-text-dark mb-1">{text.name}</h3>
+                      <p className="text-secondary font-body font-semibold mb-2">{text.role}</p>
+                      <p className="text-sm text-text-muted mb-3">{text.specialization}</p>
+                      <button
+                        className="mt-3 text-secondary text-sm font-medium hover:underline"
+                        onClick={() => setSelectedMember({ ...member, ...text })}
+                      >
+                        {t('team.member.readmore')}
+                      </button>
+                    </div>
+                  </motion.div>
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
 
           {selectedMember && (

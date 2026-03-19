@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type Language = 'fr' | 'en';
+type Language = 'fr' | 'en' | 'ar';
 
 interface TranslationContextType {
     language: Language;
@@ -23,7 +23,7 @@ interface TranslationProviderProps {
 }
 
 export const TranslationProvider = ({ children }: TranslationProviderProps) => {
-    const [language, setLanguage] = useState<Language>('fr');
+    const [language, setLanguage] = useState<Language>('en');
 
     const translations = {
         fr: {
@@ -37,10 +37,11 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'nav.enrollNow': 'Inscrivez-vous maintenant',
             'nav.language.fr': 'Français',
             'nav.language.en': 'Anglais',
+            'nav.language.ar': 'Arabe',
 
             // footer
             'footer.about.title': 'À propos de TWINKL',
-            'footer.about.description': 'Un centre de tutorat et d’apprentissage dédié à l’accompagnement des élèves grâce à un enseignement personnalisé et à plusieurs programmes internationaux.',
+            'footer.about.description': 'Une école internationale multidisciplinaire et d’apprentissage dédié à l’accompagnement des élèves grâce à un enseignement personnalisé et à plusieurs programmes internationaux.',
 
             'footer.contact.title': 'Informations de contact',
             'footer.contact.hours.days': 'Lundi – Dimanche',
@@ -73,7 +74,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
 
             // HomePage - About Section
             'home.about.title': 'À propos de TWINKL Education',
-            'home.about.description1': 'TWINKL Education, partie de TWINKL, est un centre de tutorat et d\'apprentissage dédié à former des étudiants curieux, confiants et compétents.',
+            'home.about.description1': 'TWINKL Education, partie de TWINKL, est une école internationale multidisciplinaire et d\'apprentissage dédié à former des étudiants curieux, confiants et compétents.',
             'home.about.description2': 'Nous fournissons une éducation de haute qualité grâce à un enseignement personnalisé, des programmes innovants et un environnement favorable, préparant chaque apprenant à la réussite académique et à la croissance tout au long de la vie.',
             'home.about.discoverStory': 'Découvrez notre histoire',
 
@@ -83,7 +84,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'home.subjects.sciences': 'Sciences',
             'home.subjects.sciences.desc': 'Biologie, Chimie, Physique, Science Coordonnée/Combinée',
             'home.subjects.math': 'Mathématiques',
-            'home.subjects.math.desc': 'Mathématiques (Core et Extended), Mathématiques Avancées, Mathématiques Appliquées',
+            'home.subjects.math.desc': 'Mathématiques (De base et étendu), Mathématiques Avancées, Mathématiques Appliquées',
             'home.subjects.languages': 'Langues',
             'home.subjects.languages.desc': 'Anglais (Lecture, Écriture, Expression orale), Français, Arabe, Autres langues étrangères (optionnel)',
             'home.subjects.humanities': 'Sciences Humaines et Sociales',
@@ -115,7 +116,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'about.hero.title': 'À propos de TWINKL Education',
             'about.hero.subtitle': 'Cultiver l\'excellence grâce à une éducation personnalisée',
             'about.story.title': 'Notre Histoire',
-            'about.story.description1': 'TWINKL Education, partie de TWINKL, est un centre de tutorat et d\'apprentissage dédié à former des étudiants curieux, confiants et compétents.',
+            'about.story.description1': 'TWINKL Education, partie de TWINKL, est une école internationale multidisciplinaire et d\'apprentissage dédiée à former des étudiants curieux, confiants et compétents.',
             'about.story.description2': 'Nous fournissons une éducation de haute qualité grâce à un enseignement personnalisé, des programmes innovants et un environnement favorable, préparant chaque apprenant à la réussite académique et à la croissance tout au long de la vie.',
             'about.values.title': 'Nos Valeurs',
             'about.values.excellence': 'Excellence',
@@ -190,6 +191,45 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'team.standout.curriculum.desc': 'Expertise approfondie des programmes internationaux et des systèmes d\'examen',
             'team.standout.global': 'Expérience Mondiale',
             'team.standout.global.desc': 'Expérience d\'enseignement international dans divers contextes éducatifs',
+            'team.cyrine.name': 'Dr. Cyrine Belhadj',
+            'team.cyrine.role': 'PDG / Fondatrice de TWINKL Education',
+            'team.cyrine.specialization': 'Professeur de biochimie',
+            'team.cyrine.description': 'Dr. Cyrine Belhadj, Fondatrice & PDG de TWINKL Education, est une ingénieure hautement qualifiée et enseignante universitaire avec plus de 10 ans d’expérience dans l’enseignement et la direction pédagogique. Enseignante certifiée Cambridge spécialisée en sciences, elle s’engage à promouvoir l’excellence académique et le développement global des élèves. Sous sa direction, TWINKL Education offre un environnement d’apprentissage structuré, innovant et centré sur l’étudiant, permettant aux apprenants d’atteindre leur plein potentiel et de réussir dans un contexte académique mondial.',
+
+            'team.soumaya.name': 'Mme Soumaya Oualha',
+            'team.soumaya.role': 'Fondatrice de TWINKL',
+            'team.soumaya.specialization': 'Professeur de français',
+            'team.soumaya.description': 'Mme Soumaya Oualha est la fondatrice et propriétaire de TWINKL et une enseignante de français très expérimentée. Elle est dédiée à l’excellence académique et à la compréhension culturelle, offrant aux étudiants un accompagnement personnalisé et un enseignement efficace des langues. Sous sa direction, TWINKL Education favorise un environnement d’apprentissage innovant et centré sur l’étudiant, permettant aux apprenants de réaliser leur plein potentiel.',
+
+            'team.salim.name': 'M. Salim Brahim',
+            'team.salim.role': 'Enseignant',
+            'team.salim.specialization': 'Professeur TIC',
+            'team.salim.description': 'M. Salim Brahim est un ingénieur logiciel hautement qualifié et enseignant en TIC avec plus de trois ans d’expérience dans le développement et la maintenance d’applications web à l’échelle entreprise. Titulaire d’un diplôme d’ingénieur en informatique de l’ESPRIT obtenu en 2022, il est expert dans la construction de solutions robustes et évolutives, l’intégration de systèmes, les tests automatisés et la garantie de qualité. En tant qu’enseignant TIC qualifié, il dispense efficacement un enseignement technologique et intègre des outils numériques dans l’apprentissage moderne.',
+
+            'team.rim.name': 'Mme Rim Hana',
+            'team.rim.role': 'Enseignante',
+            'team.rim.specialization': 'Professeur d’anglais',
+            'team.rim.description': 'Mme Rim Hana est enseignante d’anglais et traductrice professionnelle spécialisée dans l’enseignement des langues et la communication interculturelle. Elle détient un Master en Traduction et Interprétation de l’Institut Supérieur des Sciences Humaines de Tunis et une Licence en Langue, Littérature et Civilisation anglaises de la Faculté des Sciences Humaines et Sociales de Tunis. Elle a enseigné dans plusieurs établissements internationaux, concevant des cours interactifs centrés sur l’apprenant, alignés sur le programme Cambridge et intégrant des outils numériques et des stratégies pédagogiques modernes.',
+
+            'team.achref.name': 'M. Achref Ben Brahim',
+            'team.achref.role': 'Enseignant',
+            'team.achref.specialization': 'Professeur de mathématiques',
+            'team.achref.description': 'M. Achref est ingénieur et enseignant en informatique avec une expérience internationale. Il enseigne les TIC, les mathématiques et les études commerciales dans le cadre du curriculum britannique. Avec une expérience en inclusion numérique et support technique, il relie l’éducation et la technologie. Passionné par l’autonomisation des jeunes, il favorise un apprentissage créatif et responsable de la technologie, encourageant l’innovation et la pensée critique via un enseignement centré sur l’étudiant.',
+
+            'team.salma.name': 'Mme Salma Ben Khalifa',
+            'team.salma.role': 'Enseignante',
+            'team.salma.specialization': 'Professeur de commerce',
+            'team.salma.description': 'Mme Salma Ben Khelifa possède une solide expérience en développement commercial, communication stratégique et leadership organisationnel. Elle a occupé des postes liés aux affaires à l’échelle nationale et internationale, notamment en développement des partenariats et formation en leadership chez AIESEC et Artiphany. Elle a également travaillé comme responsable des relations publiques chez iWatch et coordinatrice d’événements chez Mdinti. Son expérience professionnelle permet de relier théorie et pratique, inspirant les étudiants à développer créativité, leadership et vision globale des affaires.',
+            
+            'team.mohamedsaadallah.name': 'M. Mohamed Saadallah',
+            'team.mohamedsaadallah.role': 'Enseignant',
+            'team.mohamedsaadallah.specialization': 'Professeur de physique',
+            'team.mohamedsaadallah.description': 'Ingénieur et enseignant expérimenté, il maîtrise parfaitement les programmes IGCSE et A-Level de Cambridge. En alliant expertise technique et mise en pratique, il simplifie les concepts complexes de physique, permettant ainsi aux élèves d\'obtenir d\'excellents résultats scolaires et d\'acquérir les compétences indispensables en matière de résolution de problèmes pour réussir leur avenir.',
+
+            'team.mohamedhomsi.name': 'M. Muhammad Homsi',
+            'team.mohamedhomsi.role': 'Enseignant',
+            'team.mohamedhomsi.specialization': 'Professeur de mathématiques',
+            'team.mohamedhomsi.description': 'M. Muhammad est un ingénieur en mécanique et un enseignant dévoué qui maîtrise parfaitement les programmes de l\'IGCSE et des A-Levels de Cambridge. En associant sa formation technique en ingénierie à son expertise en mathématiques et en physique, il transforme des formules abstraites complexes en applications intuitives et concrètes. Son approche pédagogique vise à combler le fossé entre l\'excellence théorique et la résolution pratique de problèmes, garantissant ainsi que ses élèves soient non seulement préparés à obtenir d\'excellents résultats aux examens, mais aussi à répondre aux exigences rigoureuses de l\'enseignement supérieur et de leurs futures carrières techniques.',
 
             // Cambridge Page
             'cambridge.title': 'Cambridge International',
@@ -237,6 +277,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'nav.enrollNow': 'Enroll Now',
             'nav.language.fr': 'French',
             'nav.language.en': 'English',
+            'nav.language.ar': 'Arabic',
 
             // footer
             'footer.about.title': 'About TWINKL',
@@ -390,6 +431,45 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'team.standout.curriculum.desc': 'Deep expertise in international curricula and examination systems',
             'team.standout.global': 'Global Experience',
             'team.standout.global.desc': 'International teaching experience across diverse educational contexts',
+            'team.cyrine.name': 'Dr. Cyrine Belhadj',
+            'team.cyrine.role': 'CEO / Founder of TWINKL Education',
+            'team.cyrine.specialization': 'Biochemistry Teacher',
+            'team.cyrine.description': 'Dr. Cyrine Belhadj, Founder & CEO of TWINKL Education, is a highly qualified engineer and university educator with over 10 years of experience in teaching and educational leadership. She is a Certified Cambridge Teacher specializing in Science, committed to fostering academic excellence and holistic development in students. Under her guidance, TWINKL Education provides a structured, innovative, and student-centered learning environment, empowering learners to achieve their full potential and succeed in a global academic landscape.',
+
+            'team.soumaya.name': 'Ms. Soumaya Oualha',
+            'team.soumaya.role': 'Founder of TWINKL',
+            'team.soumaya.specialization': 'French Teacher',
+            'team.soumaya.description': 'Ms. Soumaya Oualha is the Founder and Owner of TWINKL and a highly experienced French teacher. She is dedicated to fostering academic excellence and cultural understanding, providing students with personalized guidance and effective language instruction. Under her leadership, TWINKL Education promotes a student-centered, innovative learning environment, empowering learners to achieve their full potential.',
+
+            'team.salim.name': 'Mr. Salim Brahim',
+            'team.salim.role': 'Teacher',
+            'team.salim.specialization': 'ICT Teacher',
+            'team.salim.description': 'Mr. Salim Brahim is a highly qualified Software Engineer and ICT Teacher with over three years of experience in developing and maintaining enterprise-level web applications. He holds a National Engineering Diploma in Computer Engineering from ESPRIT, obtained in 2022. His expertise includes building robust and scalable solutions, system integration, automated testing, and ensuring quality and reliability. As a qualified ICT educator, he effectively delivers technology-based instruction and integrates digital tools into modern learning environments.',
+
+            'team.rim.name': 'Ms. Rim Hana',
+            'team.rim.role': 'Teacher',
+            'team.rim.specialization': 'English Teacher',
+            'team.rim.description': 'Ms. Rim Hana is a professional English teacher and translator with expertise in language instruction and intercultural communication. She holds a Master\'s Degree in Translation and Interpreting from the Higher Institute of Human Sciences of Tunis and a Bachelor\'s Degree in English Language, Literature, and Civilization from the Faculty of Human and Social Sciences of Tunis. She has taught in several international institutions, designing interactive, learner-focused lessons aligned with the Cambridge curriculum, integrating digital tools and modern teaching strategies to enhance students\' language proficiency and confidence.',
+
+            'team.achref.name': 'Mr. Achref Ben Brahim',
+            'team.achref.role': 'Teacher',
+            'team.achref.specialization': 'Mathematics Teacher',
+            'team.achref.description': 'Mr. Achref is an engineer and computer science educator with international experience. He teaches ICT, Mathematics, and Business Studies within the British Curriculum framework. With a background in digital inclusion and technical support, he bridges education and technology. Passionate about empowering youth, he promotes creative and responsible tech learning, fostering innovation and critical thinking through engaging, student-centered teaching.',
+
+            'team.salma.name': 'Ms. Salma Ben Khalifa',
+            'team.salma.role': 'Teacher',
+            'team.salma.specialization': 'Business Teacher',
+            'team.salma.description': 'Ms. Salma Ben Khelifa brings strong experience in business development, strategic communication, and organizational leadership. She has served in business-focused roles at national and international levels, including Business Development positions at AIESEC and Artiphany, managing partnerships, supporting talent development, and leading training programs in leadership and professional skills. She has also worked as Public Relations Manager at iWatch and Events Coordinator at Mdinti, gaining experience in stakeholder management, project coordination, and event strategy. Her professional background allows her to connect business theory with practical application, inspiring students to develop creativity, leadership, and a global business mindset.',
+
+            'team.mohamedsaadallah.name': 'Mr. Mohamed Saadallah',
+            'team.mohamedsaadallah.role': 'Teacher',
+            'team.mohamedsaadallah.specialization': 'Physics Teacher',
+            'team.mohamedsaadallah.description': 'An experienced Engineer and educator with a deep mastery of the Cambridge IGCSE and A-Level curricula. By blending technical expertise with practical application, they simplify complex physics concepts, empowering students to achieve top academic results and develop essential problem-solving skills for future success.',
+
+            'team.mohamedhomsi.name': 'Mr. Muhammad Homsi',
+            'team.mohamedhomsi.role': 'Teacher',
+            'team.mohamedhomsi.specialization': 'Mathematics Teacher',
+            'team.mohamedhomsi.description': 'Mr. Muhammad is a dedicated Mechanical Engineer and educator with a profound mastery of the Cambridge IGCSE and A-Level curricula. By blending his technical engineering background with an expertise in Mathematics and Physics, he transforms complex abstract formulas into intuitive, real-world applications. His teaching approach focuses on bridging the gap between theoretical excellence and practical problem-solving, ensuring his students are not only prepared for top-tier exam results but also for the rigorous demands of higher education and future technical careers.',
 
             // Cambridge Page
             'cambridge.title': 'Cambridge International',
@@ -425,6 +505,245 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'canadian.content.p1': 'At TWINKL Education, we provide programs aligned with the Tunisian national curriculum, ensuring students gain a strong academic foundation while developing critical thinking and problem-solving skills.',
             'canadian.content.p2': 'Our approach emphasizes core subjects such as Mathematics, Sciences, Languages, and Humanities, preparing learners for national examinations and higher education opportunities.',
             'canadian.content.p3': 'We combine structured teaching with personalized support to help students excel academically, grow personally, and build the skills needed for future success.',
+        },
+        ar: {
+            // Navigation
+            'nav.home': 'الصفحة الرئيسية',
+            'nav.systems': 'الأنظمة',
+            'nav.about': 'نبذة عنا',
+            'nav.team': 'فريقنا',
+            'nav.career': 'الوظائف',
+            'nav.enroll': 'التسجيل',
+            'nav.enrollNow': 'سجّل الآن',
+            'nav.language.fr': 'الفرنسية',
+            'nav.language.en': 'الإنجليزية',
+            'nav.language.ar': 'العربية',
+
+            // footer
+            'footer.about.title': 'نبذة عن TWINKL',
+            'footer.about.description': 'مدرسة دولية للتدريس الخصوصي والتعلم، مكرسة لدعم الطلاب من خلال تعليم مخصص وبرامج دولية متنوعة.',
+
+            'footer.contact.title': 'معلومات الاتصال',
+            'footer.contact.hours.days': 'الإثنين – الأحد',
+            'footer.contact.hours.time': '09:00 صباحًا – 09:00 مساءً',
+
+            'footer.links.title': 'روابط سريعة',
+            'footer.links.home': 'الرئيسية',
+            'footer.links.about': 'نبذة عنا',
+            'footer.links.programs': 'البرامج',
+            'footer.links.team': 'فريقنا',
+            'footer.links.career': 'الوظائف',
+            'footer.links.contact': 'اتصل بنا',
+
+            'footer.location.title': 'موقعنا',
+            'footer.copyright': 'TWINKL Education. جميع الحقوق محفوظة.',
+
+            // Systems
+            'systems.cambridge': 'كامبريدج',
+            'systems.ib': 'البكالوريا الدولية',
+            'systems.tunisian': 'النظام التونسي',
+            'systems.french': 'النظام الفرنسي',
+            'systems.canadian': 'النظام الكندي',
+
+            // HomePage - Hero
+            'home.hero.title': 'مرحبًا بكم في TWINKL Education!',
+            'home.hero.subtitle': 'نحن نلهم الطلاب الصغار لتحقيق التميز الأكاديمي من خلال تعليم مخصص وبيئة داعمة.',
+            'home.hero.enrollToday': 'سجّل اليوم',
+            'home.hero.learnMore': 'اعرف المزيد',
+
+            // HomePage - About Section
+            'home.about.title': 'نبذة عن TWINKL Education',
+            'home.about.description1': 'TWINKL Education، وهي جزء من TWINKL، هي مدرسة دولية للتدريس الخصوصي والتعلم تكرس جهودها لتنشئة طلاب يتمتعون بالفضول والثقة بالنفس والكفاءة.',
+            'home.about.description2': 'نحن نقدم تعليمًا عالي الجودة من خلال التدريس المخصص، والبرامج المبتكرة، والبيئة الداعمة، مما يُعد كل متعلم للنجاح الأكاديمي والتطور المستمر طوال الحياة.',
+            'home.about.discoverStory': 'اكتشف قصتنا',
+
+            // HomePage - Subjects
+            'home.subjects.title': 'المواد التي ندرسها',
+            'home.subjects.subtitle': 'دعم أكاديمي شامل في جميع التخصصات الرئيسية',
+            'home.subjects.sciences': 'العلوم',
+            'home.subjects.sciences.desc': 'الأحياء، الكيمياء، الفيزياء، العلوم المدمجة/المنسقة',
+            'home.subjects.math': 'الرياضيات',
+            'home.subjects.math.desc': 'الرياضيات (الأساسية والمتقدمة)، الرياضيات المتقدمة، الرياضيات التطبيقية',
+            'home.subjects.languages': 'اللغات',
+            'home.subjects.languages.desc': 'الإنجليزية (قراءة، كتابة، محادثة)، الفرنسية، العربية، لغات أجنبية أخرى (اختياري)',
+            'home.subjects.humanities': 'العلوم الإنسانية والاجتماعية',
+            'home.subjects.humanities.desc': 'التاريخ، الجغرافيا، الاقتصاد، الدراسات العالمية، إدارة الأعمال',
+            'home.subjects.arts': 'الفنون والمواد الإبداعية',
+            'home.subjects.arts.desc': 'الفن والتصميم، الموسيقى، المسرح، تكنولوجيا المعلومات',
+
+            // HomePage - Programs
+            'home.programs.title': 'برامجنا التعليمية',
+            'home.programs.subtitle': 'اختر من بين مناهج دولية معترف بها عالميًا لتناسب أهدافك التعليمية',
+            'home.programs.cambridge.title': 'كامبريدج الدولية',
+            'home.programs.cambridge.desc': 'تعليم عالمي بشهادات معترف بها دوليًا',
+            'home.programs.ib.title': 'البكالوريا الدولية',
+            'home.programs.ib.desc': 'برامج شاملة تعزز التفكير النقدي والمواطنة العالمية',
+            'home.programs.french.title': 'النظام الفرنسي',
+            'home.programs.french.desc': 'تميز في التعليم الفرنسي وفق المنهج الوطني',
+            'home.programs.tunisian.title': 'النظام التونسي',
+            'home.programs.tunisian.desc': 'تعليم عالي الجودة وفق المعايير الوطنية التونسية',
+            'home.programs.canadian.title': 'النظام الكندي',
+            'home.programs.canadian.desc': 'منهج كندي مبتكر يعزز التعلم القائم على البحث',
+            'home.programs.learnMore': 'اعرف المزيد',
+
+            // HomePage - CTA
+            'home.cta.title': 'هل أنت مستعد لبدء رحلتك التعليمية؟',
+            'home.cta.subtitle': 'انضم إلى TWINKL Education اليوم واستفد من تعليم عالمي مخصص يمكنك من تحقيق أهدافك الأكاديمية.',
+            'home.cta.enrollNow': 'سجّل الآن',
+
+            // AboutPage
+            'about.hero.title': 'حول TWINKL Education',
+            'about.hero.subtitle': 'نرعى التميز من خلال تعليم مخصص',
+            'about.story.title': 'قصتنا',
+            'about.story.description1': 'TWINKL Education هو مركز تعليمي متخصص يهدف إلى تنمية الطلاب الفضوليين والواثقين والقادرين.',
+            'about.story.description2': 'نقدم تعليمًا عالي الجودة من خلال تعليم مخصص، برامج مبتكرة، وبيئة داعمة، لإعداد كل طالب للنجاح الأكاديمي والنمو المستمر.',
+            'about.values.title': 'قيمنا',
+            'about.values.excellence': 'التميز',
+            'about.values.excellence.desc': 'نسعى لتحقيق أعلى المعايير التعليمية والإنجازات الطلابية',
+            'about.values.care': 'الرعاية',
+            'about.values.care.desc': 'نوفر بيئة داعمة يشعر فيها كل طالب بقيمته',
+            'about.values.collaboration': 'التعاون',
+            'about.values.collaboration.desc': 'نعمل مع الطلاب والأولياء والمعلمين لتحقيق النجاح',
+            'about.values.innovation': 'الابتكار',
+            'about.values.innovation.desc': 'نعتمد أساليب تدريس حديثة وتقنيات تعليمية متقدمة',
+            'about.approach.title': 'منهجنا',
+            'about.approach.description1': 'نؤمن في TWINKL Education بالنهج الشامل للتعلم الذي يجمع بين التميز الأكاديمي والتطور الشخصي. يستخدم معلمونا ذوو الخبرة أساليب تدريس مبتكرة تتناسب مع أسلوب كل طالب الفريد.',
+            'about.approach.description2': 'نقدم دعمًا كاملًا عبر العديد من المناهج الدولية، لضمان حصول الطلاب على تعليم أصيل ومتوافق مع مسارهم التعليمي المختار. من كامبريدج الدولية إلى البكالوريا الدولية، والنظام الفرنسي، التونسي، والكندي، نقدم الإرشاد المتخصص في كل خطوة.',
+
+            // CareerPage
+            'career.hero.title': 'انضم إلى فريقنا',
+            'career.hero.subtitle': 'ساهم في مستقبل التعليم في TWINKL',
+            'career.why.title': 'لماذا العمل معنا؟',
+            'career.why.subtitle': 'في TWINKL Education، نؤمن أن المعلمين المميزين يستحقون دعمًا مميزًا. انضم إلى فريق يقدّر التميز والابتكار وقوة التعليم في تغيير الحياة.',
+            'career.benefits.professional': 'التطوير المهني',
+            'career.benefits.professional.desc': 'فرص تدريب مستمرة ونمو مهني',
+            'career.benefits.environment': 'بيئة داعمة',
+            'career.benefits.environment.desc': 'ثقافة عمل تعاونية وموارد داعمة',
+            'career.benefits.package': 'حزمة مميزة',
+            'career.benefits.package.desc': 'رواتب ومزايا جذابة',
+            'career.requirements.title': 'المتطلبات',
+            'career.requirements.1': 'درجة البكالوريوس في التخصص (يفضل الماجستير)',
+            'career.requirements.2': 'شهادة تدريس أو خبرة مثبتة',
+            'career.requirements.3': 'مهارات قوية في التواصل وإدارة الصف',
+            'career.requirements.4': 'فهم أنظمة التعليم الدولية',
+            'career.process.title': 'عملية التقديم',
+            'career.process.step1': 'تقديم الطلب',
+            'career.process.step1.desc': 'أرسل سيرتك الذاتية ورسالة التغطية',
+            'career.process.step2': 'المقابلة',
+            'career.process.step2.desc': 'لقاء فريق التعليم لدينا',
+            'career.process.step3': 'انضم إلينا',
+            'career.process.step3.desc': 'ابدأ رحلتك مع TWINKL',
+            'career.process.ready': 'هل أنت مستعد لإحداث فرق في حياة الطلاب؟',
+            'career.process.apply': 'قدّم الآن',
+            'career.apply.title': 'كيفية التقديم؟',
+            'career.apply.instruction': 'أرسل سيرتك الذاتية ورسالة الدافع إلى:',
+            'career.apply.email': 'teducm@gmail.com',
+
+            // EnrollPage
+            'enroll.hero.title': 'سجّل اليوم',
+            'enroll.hero.subtitle': 'ابدأ رحلتك نحو التميز الأكاديمي',
+            'enroll.why.title': 'لماذا تختار TWINKL Education؟',
+            'enroll.why.subtitle': 'انضم إلى مجتمع تعليمي ملتزم بالتميز والابتكار والتعليم المخصص. سجل نجاحات الطلاب السابقة تتحدث عن نفسها.',
+            'enroll.benefits.1': 'معلمون خبراء يحملون شهادات دولية',
+            'enroll.benefits.2': 'خيارات متعددة للمناهج (كامبريدج، البكالوريا الدولية، الفرنسي، التونسي، الكندي)',
+            'enroll.benefits.3': 'حصص صغيرة لتعليم مخصص',
+            'enroll.benefits.4': 'مرافق حديثة وموارد تعليمية',
+            'enroll.benefits.5': 'سجل حافل من التميز الأكاديمي',
+            'enroll.benefits.6': 'جداول مرنة',
+            'enroll.benefits.7': 'تقارير تقدم منتظمة وتواصل مع أولياء الأمور',
+            'enroll.benefits.8': 'إعداد وإرشاد للجامعة',
+            'enroll.form.title': 'نموذج التسجيل',
+            'enroll.application.title': 'طلب التسجيل',
+            'enroll.application.description': 'يرجى تعبئة نموذج التسجيل بعناية، ووضع علامة في المربعات المناسبة، وإرسال الملف المكتمل إلى TWINKL Education عبر البريد الإلكتروني.',
+            'enroll.application.button': 'نموذج التسجيل',
+
+            // TeamPage
+            'team.hero.title': 'فريقنا',
+            'team.hero.subtitle': 'معلمون ذو خبرة ملتزمون بنجاح الطلاب',
+            'team.experts.title': 'خبراؤنا',
+            'team.experts.subtitle': 'فريقنا يتكون من معلمين مؤهلين تأهيلاً عاليًا يتمتعون بخبرة واسعة في المناهج الدولية. كل عضو يجلب الشغف والخبرة والالتزام بتنمية إمكانات الطلاب.',
+            'team.member.readmore': 'اقرأ المزيد',
+            'team.standout.title': 'لماذا يبرز فريقنا',
+            'team.standout.qualified': 'خبراء مؤهلون',
+            'team.standout.qualified.desc': 'شهادات متقدمة وخبرات في مجالاتهم',
+            'team.standout.curriculum': 'متخصصون في المناهج',
+            'team.standout.curriculum.desc': 'خبرة عميقة في المناهج الدولية وأنظمة الامتحانات',
+            'team.standout.global': 'خبرة عالمية',
+            'team.standout.global.desc': 'خبرة تعليمية دولية عبر بيئات تعليمية متنوعة',
+            'team.cyrine.name': 'د. سيرين بلحاج',
+            'team.cyrine.role': 'الرئيسة التنفيذية / مؤسسة TWINKL Education',
+            'team.cyrine.specialization': 'أستاذة الكيمياء الحيوية',
+            'team.cyrine.description': 'د. سيرين بلحاج، مؤسسة ومديرة TWINKL Education، مهندسة مؤهلة وأستاذة جامعية ذات خبرة تزيد عن 10 سنوات في التدريس والإدارة التعليمية. معلمة معتمدة من كامبريدج متخصصة في العلوم، ملتزمة بتحقيق التميز الأكاديمي والتنمية الشاملة للطلاب. تحت قيادتها، توفر TWINKL Education بيئة تعليمية منظمة ومبتكرة ومركزة على الطالب، تمكّن المتعلمين من تحقيق كامل إمكاناتهم والنجاح في السياق الأكاديمي العالمي.',
+
+            'team.soumaya.name': 'السيدة سمية علاه',
+            'team.soumaya.role': 'مؤسسة TWINKL',
+            'team.soumaya.specialization': 'أستاذة اللغة الفرنسية',
+            'team.soumaya.description': 'السيدة سمية علاه هي مؤسسة ومالكة منظمة TWINKL ومعلمة فرنسية ذات خبرة عالية. هي ملتزمة بتحقيق التميز الأكاديمي والفهم الثقافي، وتوفر للطلاب توجيهًا شخصيًا وتعليمًا فعالًا للغة. تحت قيادتها، تعزز TWINKL Education بيئة تعلم مبتكرة ومركزة على الطالب، تمكن المتعلمين من تحقيق كامل إمكاناتهم.',
+
+            'team.salim.name': 'الأستاذ سليم ابراهيم',
+            'team.salim.role': 'معلم',
+            'team.salim.specialization': 'أستاذ تكنولوجيا المعلومات',
+            'team.salim.description': 'الأستاذ سليم ابراهيم مهندس برمجيات مؤهل وأستاذ تكنولوجيا المعلومات مع أكثر من ثلاث سنوات من الخبرة في تطوير وصيانة تطبيقات ويب على مستوى الشركات. حاصل على دبلوم وطني في هندسة الحاسوب من ESPRIT عام 2022. يشمل خبرته بناء حلول قوية وقابلة للتوسع، تكامل الأنظمة، الاختبارات الآلية، وضمان الجودة. كمعلم تكنولوجيا المعلومات مؤهل، يقوم بتقديم التعليم التقني بفاعلية ودمج الأدوات الرقمية في بيئات التعلم الحديثة.',
+
+            'team.rim.name': 'السيدة ريم هنا',
+            'team.rim.role': 'معلمة',
+            'team.rim.specialization': 'أستاذة اللغة الإنجليزية',
+            'team.rim.description': 'السيدة ريم هنا معلمة ومترجمة محترفة في اللغة الإنجليزية، متخصصة في تعليم اللغات والتواصل بين الثقافات. حصلت على ماجستير في الترجمة والتحرير من المعهد العالي للعلوم الإنسانية بتونس وبكالوريوس في اللغة الإنجليزية وآدابها وحضارتها من كلية العلوم الإنسانية والاجتماعية بتونس. قامت بالتدريس في عدة مؤسسات دولية، وتصمم دروسًا تفاعلية تركز على المتعلم ومتوافقة مع منهج كامبريدج، مع دمج الأدوات الرقمية واستراتيجيات التعليم الحديثة.',
+
+            'team.achref.name': 'الأستاذ أشرف بن ابراهيم',
+            'team.achref.role': 'معلم',
+            'team.achref.specialization': 'أستاذ الرياضيات',
+            'team.achref.description': 'الأستاذ أشرف مهندس ومعلم علوم الحاسوب ذو خبرة دولية. يدرّس تكنولوجيا المعلومات والرياضيات والدراسات التجارية ضمن المنهج البريطاني. بفضل خبرته في الشمول الرقمي والدعم التقني، يجمع بين التعليم والتكنولوجيا. شغوف بتمكين الشباب، يعزز التعلم الإبداعي والمسؤول للتكنولوجيا ويشجع الابتكار والتفكير النقدي من خلال تدريس يركز على الطالب.',
+
+            'team.salma.name': 'السيدة سلمى بن خليفة',
+            'team.salma.role': 'معلمة',
+            'team.salma.specialization': 'أستاذة الأعمال',
+            'team.salma.description': 'السيدة سلمى بن خليفة تمتلك خبرة قوية في تطوير الأعمال والتواصل الاستراتيجي والقيادة التنظيمية. عملت في أدوار مرتبطة بالأعمال على المستويين الوطني والدولي، بما في ذلك تطوير الشراكات والتدريب على القيادة في AIESEC وArtiphany. كما عملت كمديرة علاقات عامة في iWatch ومنسقة فعاليات في Mdinti. خبرتها المهنية تمكنها من ربط النظرية بالتطبيق، ملهمة الطلاب لتطوير الإبداع والقيادة وفهم الأعمال عالميًا.',
+
+            'team.mohamedsaadallah.name': 'الأستاذ محمد سعد الله',
+            'team.mohamedsaadallah.role': 'معلم',
+            'team.mohamedsaadallah.specialization': 'أستاذ الفيزياء',
+            'team.mohamedsaadallah.description': 'مهندس ومعلم ذو خبرة عميقة في مناهج كامبريدج IGCSE وA-Level. من خلال دمج الخبرة التقنية مع التطبيق العملي، يبسط مفاهيم الفيزياء المعقدة، مما يمكّن الطلاب من تحقيق نتائج أكاديمية ممتازة وتطوير مهارات حل المشكلات الأساسية للنجاح المستقبلي.',
+
+            'team.mohamedhomsi.name': 'الأستاذ محمد حمصي',
+            'team.mohamedhomsi.role': 'معلم',
+            'team.mohamedhomsi.specialization': 'أستاذ الرياضيات',
+            'team.mohamedhomsi.description': 'الأستاذ محمد مهندس ميكانيكي ومعلم ذو خبرة عميقة في مناهج كامبريدج IGCSE وA-Level. من خلال دمج خلفيته الهندسية مع خبرته في الرياضيات والفيزياء، يحول الصيغ المعقدة إلى تطبيقات واقعية بديهية. يركز نهجه التدريسي على سد الفجوة بين التميز النظري وحل المشكلات العملي، مما يضمن استعداد طلابه ليس فقط لنتائج الامتحانات الممتازة ولكن أيضًا لمتطلبات التعليم العالي والمهن التقنية المستقبلية.',
+
+            // Cambridge Page
+            'cambridge.title': 'كامبريدج الدولية',
+            'cambridge.subtitle': 'تعليم عالمي متميز بشهادات معترف بها دوليًا',
+            'cambridge.content.p1': 'فيفي TWINKL Education، نطبق منهج كامبريدج الدولي، وهو منهج معترف به عالميًا ومصمم لتنمية قدرات المتعلمين ليصبحوا واثقين ومسؤولين ومستقلين.',
+            'cambridge.content.p2': 'يركز البرنامج على التفكير النقدي والإبداع وحل المشكلات بشكل عملي، مما يُعد الطلاب للنجاح الأكاديمي والفرص المستقبلية في جميع أنحاء العالم.',
+            'cambridge.content.p3': 'تقدم برامج كامبريدج لدينا مسارات تعليمية منظمة، بدءًا من المرحلة الابتدائية (كامبريدج برايماري) مرورًا بالمرحلة الثانوية (IGCSE) وصولًا إلى المستوى المتقدم (AS و A Levels)، مما يضمن مسارًا أكاديميًا سلسًا.',
+            'cambridge.content.p4': 'من خلال تقديم المشورة الشخصية والدعم التعليمي، نساعد كل طالب على تحقيق أقصى إمكاناته مع تعزيز حب التعلم.',
+
+            // IB Page
+            'ib.title': 'البكالوريا الدولية',
+            'ib.subtitle': 'برامج البكالوريا الدولية (IB) الشاملة التي تعزز التفكير النقدي والمواطنة العالمية',
+            'ib.content.p1': 'في TWINKL Education، نفتخر بدعم مبادئ البكالوريا الدولية (IB) — وهو إطار أكاديمي عالمي المستوى يلهم الطلاب ليصبحوا متعلمين واثقين من أنفسهم ومتعاطفين وذوي عقلية عالمية.',
+            'ib.content.p2': 'يشجع برنامج البكالوريا الدولية (IB) التفكير النقدي والإبداع والوعي الدولي، مما يتيح للطلاب استكشاف الأفكار والتشكيك في الافتراضات والتفاعل مع تحديات العالم الواقعي. ومن خلال نهج قائم على الاستقصاء، يطور المتعلمون المهارات والعقلية اللازمة للنجاح في التعليم العالي وما بعده.',
+
+            // French System Page
+            'french.title': 'النظام الفرنسي',
+            'french.subtitle': 'تميز في التعليم الفرنسي وفق المنهج الوطني',
+            'french.content.p1': 'في TWINKL Education، نفتخر باتباع نهج التميز الذي يتسم به النظام التعليمي الفرنسي، المعروف بأسسه الأكاديمية المتينة، والتفكير النقدي، ونهج التعلم المنظم.',
+            'french.content.p2': 'يركز منهجنا على الصرامة، والانضباط، والمهارات التحليلية، لمساعدة الطلاب على فهم عميق للعلوم واللغات والعلوم الإنسانية.',
+            'french.content.p3': 'من خلال التعليم المخصص وبيئة داعمة، نوجه المتعلمين لتحقيق نتائج متميزة والاستعداد بثقة للامتحانات الوطنية والدولية.',
+
+            // Tunisian System Page
+            'tunisian.title': 'النظام التونسي',
+            'tunisian.subtitle': 'تعليم عالي الجودة وفق المعايير الوطنية التونسية',
+            'tunisian.content.p1': 'في TWINKL Education، نقدم برامج متوافقة مع المنهج الوطني التونسي، لضمان اكتساب الطلاب أساس أكاديمي قوي وتطوير مهارات التفكير النقدي وحل المشكلات.',
+            'tunisian.content.p2': 'يركز نهجنا على المواد الأساسية مثل الرياضيات، العلوم، اللغات، والعلوم الإنسانية، لإعداد الطلاب للامتحانات الوطنية وفرص التعليم العالي.',
+            'tunisian.content.p3': 'نحن نجمع بين التعليم المنظم والدعم المخصص لمساعدة الطلاب على التفوق أكاديميًا والنمو الشخصي وبناء المهارات اللازمة للنجاح في المستقبل.',
+
+            // Canadian System Page
+            'canadian.title': 'النظام الكندي',
+            'canadian.subtitle': 'منهج كندي مبتكر يعزز التعلم القائم على البحث',
+            'canadian.content.p1': 'في TWINKL Education، نقدم برامج مبتكرة تعزز أساسًا أكاديميًا قويًا وتطوير التفكير النقدي وحل المشكلات.',
+            'canadian.content.p2': 'يركز نهجنا على المواد الأساسية مثل الرياضيات، العلوم، اللغات، والعلوم الإنسانية، لإعداد الطلاب للامتحانات الوطنية وفرص التعليم العالي.',
+            'canadian.content.p3': 'نحن نجمع بين التعليم المنظم والدعم المخصص لمساعدة الطلاب على التفوق أكاديميًا والنمو الشخصي وبناء المهارات اللازمة للنجاح في المستقبل.',
         },
     };
 
