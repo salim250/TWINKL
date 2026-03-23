@@ -162,7 +162,7 @@ export const HomePage = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/5212329/pexels-photo-5212329.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="/img/pexels-photo-5212329.jpg"
                 alt="Students learning"
                 className="rounded-2xl shadow-2xl"
               />

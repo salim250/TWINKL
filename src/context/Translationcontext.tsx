@@ -74,7 +74,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
 
             // HomePage - About Section
             'home.about.title': 'À propos de TWINKL Education',
-            'home.about.description1': 'TWINKL Education, partie de TWINKL, est une école internationale multidisciplinaire et d\'apprentissage dédié à former des étudiants curieux, confiants et compétents.',
+            'home.about.description1': 'TWINKL Education est une école internationale multidisciplinaire et d\'apprentissage dédié à former des étudiants curieux, confiants et compétents.',
             'home.about.description2': 'Nous fournissons une éducation de haute qualité grâce à un enseignement personnalisé, des programmes innovants et un environnement favorable, préparant chaque apprenant à la réussite académique et à la croissance tout au long de la vie.',
             'home.about.discoverStory': 'Découvrez notre histoire',
 
@@ -116,7 +116,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'about.hero.title': 'À propos de TWINKL Education',
             'about.hero.subtitle': 'Cultiver l\'excellence grâce à une éducation personnalisée',
             'about.story.title': 'Notre Histoire',
-            'about.story.description1': 'TWINKL Education, partie de TWINKL, est une école internationale multidisciplinaire et d\'apprentissage dédiée à former des étudiants curieux, confiants et compétents.',
+            'about.story.description1': 'TWINKL Education est une école internationale multidisciplinaire et d\'apprentissage dédiée à former des étudiants curieux, confiants et compétents.',
             'about.story.description2': 'Nous fournissons une éducation de haute qualité grâce à un enseignement personnalisé, des programmes innovants et un environnement favorable, préparant chaque apprenant à la réussite académique et à la croissance tout au long de la vie.',
             'about.values.title': 'Nos Valeurs',
             'about.values.excellence': 'Excellence',
@@ -314,7 +314,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
 
             // HomePage - About Section
             'home.about.title': 'About TWINKL Education',
-            'home.about.description1': 'TWINKL Education, part of TWINKL, is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.',
+            'home.about.description1': 'TWINKL Education is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.',
             'home.about.description2': 'We provide high-quality education through personalized teaching, innovative programs, and a supportive environment, preparing every learner for academic success and lifelong growth.',
             'home.about.discoverStory': 'Discover Our Story',
 
@@ -356,7 +356,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'about.hero.title': 'About TWINKL Education',
             'about.hero.subtitle': 'Nurturing excellence through personalized education',
             'about.story.title': 'Our Story',
-            'about.story.description1': 'TWINKL Education, part of TWINKL, is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.',
+            'about.story.description1': 'TWINKL Education is a dedicated tutoring and learning center committed to nurturing curious, confident, and capable students.',
             'about.story.description2': 'We provide high-quality education through personalized teaching, innovative programs, and a supportive environment, preparing every learner for academic success and lifelong growth.',
             'about.values.title': 'Our Values',
             'about.values.excellence': 'Excellence',
@@ -553,7 +553,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
 
             // HomePage - About Section
             'home.about.title': 'نبذة عن TWINKL Education',
-            'home.about.description1': 'TWINKL Education، وهي جزء من TWINKL، هي مدرسة دولية للتدريس الخصوصي والتعلم تكرس جهودها لتنشئة طلاب يتمتعون بالفضول والثقة بالنفس والكفاءة.',
+            'home.about.description1': 'TWINKL Education هي مدرسة دولية للتدريس الخصوصي والتعلم تكرس جهودها لتنشئة طلاب يتمتعون بالفضول والثقة بالنفس والكفاءة.',
             'home.about.description2': 'نحن نقدم تعليمًا عالي الجودة من خلال التدريس المخصص، والبرامج المبتكرة، والبيئة الداعمة، مما يُعد كل متعلم للنجاح الأكاديمي والتطور المستمر طوال الحياة.',
             'home.about.discoverStory': 'اكتشف قصتنا',
 
