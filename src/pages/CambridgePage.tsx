@@ -1,9 +1,15 @@
 import { BookOpen, Target, Award } from 'lucide-react';
 import { SystemPageLayout } from '../components/SystemPageLayout';
 import { useTranslation } from '../context/TranslationContext';
+import { trackEvent } from '../helpers/analytics';
+import { useEffect } from 'react';
 
 export const CambridgePage = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    trackEvent('system_view', 'engagement', 'cambridge');
+  }, []);
 
   const levels = [
     {

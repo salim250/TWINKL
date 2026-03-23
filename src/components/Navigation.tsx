@@ -3,6 +3,7 @@ import { Search, Menu, X, Globe } from 'lucide-react';
 import { useNavigation } from '../context/NavigationContext';
 import { useTranslation } from '../context/Translationcontext';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { trackEvent } from '../helpers/analytics';
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,14 +42,19 @@ export const Navigation = () => {
   ];
 
   const handleNavigate = (page: typeof menuItems[0]['page']) => {
+    trackEvent('nav_click', 'navigation', page);
     setCurrentPage(page);
     setIsMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleLanguageChange = (lang: 'fr' | 'en') => {
-    setLanguage(lang);
-    setIsLangMenuOpen(false);
+  const toggleMobileMenu = () => {
+    trackEvent(
+      isMobileMenuOpen ? 'menu_close' : 'menu_open',
+      'navigation'
+    );
+
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -106,7 +112,10 @@ export const Navigation = () => {
             <LanguageSwitcher />
 
             <button
-              onClick={() => handleNavigate('enroll')}
+              onClick={() => {
+                trackEvent('enroll_click', 'conversion', 'navbar');
+                handleNavigate('enroll');
+              }}
               className="bg-secondary text-white px-6 py-2.5 rounded-lg font-body font-medium hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105"
             >
               {t('nav.enrollNow')}
@@ -115,7 +124,7 @@ export const Navigation = () => {
 
           <button
             className="xl:hidden text-text-dark"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => toggleMobileMenu()}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -169,7 +178,10 @@ export const Navigation = () => {
             <LanguageSwitcher isMobile={true} />
 
             <button
-              onClick={() => handleNavigate('enroll')}
+              onClick={() => {
+                trackEvent('enroll_click', 'conversion', 'navbar');
+                handleNavigate('enroll');
+              }}
               className="w-full bg-secondary text-white px-6 py-2.5 rounded-lg font-body font-medium hover:bg-secondary/90 transition-colors"
             >
               {t('nav.enrollNow')}

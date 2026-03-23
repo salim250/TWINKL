@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import { SystemPageLayout } from '../components/SystemPageLayout';
 import { useTranslation } from '../context/TranslationContext';
+import { trackEvent } from '../helpers/analytics';
 
 export const FrenchSystemPage = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    trackEvent('system_view', 'engagement', 'french');
+  }, []);
 
   return (
     <SystemPageLayout

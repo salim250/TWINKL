@@ -1,9 +1,15 @@
 import { BookOpen, Target, Award } from 'lucide-react';
 import { SystemPageLayout } from '../components/SystemPageLayout';
 import { useTranslation } from '../context/TranslationContext';
+import { trackEvent } from '../helpers/analytics';
+import { useEffect } from 'react';
 
 export const IBPage = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    trackEvent('system_view', 'engagement', 'IB');
+  }, []);
 
   return (
     <SystemPageLayout

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "../context/TranslationContext";
+import { trackEvent } from "../helpers/analytics";
 
 interface LanguageSwitcherProps {
     isMobile?: boolean;
@@ -18,6 +19,12 @@ export const LanguageSwitcher = ({ isMobile = false }: LanguageSwitcherProps) =>
         document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
     }, [language]);
 
+    const changeLanguage = (lang) => {
+        trackEvent('lang_change', 'engagement', lang);
+
+        setLanguage(lang);
+    };
+
     if (isMobile) {
         // Mobile: show all flags horizontally
         return (
@@ -25,7 +32,7 @@ export const LanguageSwitcher = ({ isMobile = false }: LanguageSwitcherProps) =>
                 {languages.map((lang) => (
                     <button
                         key={lang.code}
-                        onClick={() => setLanguage(lang.code)}
+                        onClick={() => changeLanguage(lang.code)}
                         className={`p-1 rounded-full transition-transform hover:scale-110 ${language === lang.code ? "ring-2 ring-secondary" : ""
                             }`}
                     >
@@ -71,7 +78,7 @@ export const LanguageSwitcher = ({ isMobile = false }: LanguageSwitcherProps) =>
                         <button
                             key={lang.code}
                             onClick={() => {
-                                setLanguage(lang.code);
+                                changeLanguage(lang.code);
                                 setOpen(false);
                             }}
                             className="flex items-center gap-3 w-full px-4 py-2 hover:bg-gray-100 text-sm"

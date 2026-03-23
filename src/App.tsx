@@ -12,11 +12,15 @@ import { AboutPage } from './pages/AboutPage';
 import { TeamPage } from './pages/TeamPage';
 import { CareerPage } from './pages/CareerPage';
 import { EnrollPage } from './pages/EnrollPage';
+import { useEffect } from 'react';
+import { initGA } from './helpers/analytics';
+import { logPageView } from './helpers/analytics';
 
 function PageRouter() {
   const { currentPage } = useNavigation();
 
   const renderPage = () => {
+
     switch (currentPage) {
       case 'home':
         return <HomePage />;
@@ -46,17 +50,33 @@ function PageRouter() {
   return <>{renderPage()}</>;
 }
 
+function AppContent() {
+  const { currentPage } = useNavigation(); // ✅ now inside provider
+
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  useEffect(() => {
+    logPageView(currentPage);
+  }, [currentPage]);
+
+  return (
+    <div className="min-h-screen bg-white font-body">
+      <Navigation />
+      <main>
+        <PageRouter />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
 function App() {
   return (
     <TranslationProvider>
       <NavigationProvider>
-        <div className="min-h-screen bg-white font-body">
-          <Navigation />
-          <main>
-            <PageRouter />
-          </main>
-          <Footer />
-        </div>
+        <AppContent />
       </NavigationProvider>
     </TranslationProvider>
   );

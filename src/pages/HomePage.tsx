@@ -2,6 +2,7 @@ import { BookOpen, GraduationCap, Globe, Users, Award, ArrowRight } from 'lucide
 import { useNavigation } from '../context/NavigationContext';
 import { useTranslation } from '../context/TranslationContext';
 import { motion } from 'framer-motion';
+import { trackEvent } from '../helpers/analytics';
 
 export const HomePage = () => {
   const { setCurrentPage } = useNavigation();
@@ -117,7 +118,10 @@ export const HomePage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => handleNavigate('enroll')}
+              onClick={() => {
+                trackEvent('enroll_click', 'conversion', 'navbar');
+                handleNavigate('enroll');
+              }}
               className="bg-secondary text-white px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105 inline-flex items-center justify-center"
             >
               {t('home.hero.enrollToday')}
@@ -273,7 +277,10 @@ export const HomePage = () => {
             {t('home.cta.subtitle')}
           </p>
           <button
-            onClick={() => handleNavigate('enroll')}
+            onClick={() => {
+              trackEvent('enroll_click', 'conversion', 'navbar');
+              handleNavigate('enroll');
+            }}
             className="bg-white text-primary px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 inline-flex items-center"
           >
             {t('home.cta.enrollNow')}
