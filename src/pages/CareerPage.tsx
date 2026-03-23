@@ -120,7 +120,7 @@ export const CareerPage = () => {
             </motion.div>
             <motion.div variants={fadeUp}>
               <img
-                src="https://images.pexels.com/photos/5212329/pexels-photo-5212329.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="/img/pexels-photo-5212329.jpg"
                 alt="Career at TWINKL"
                 className="rounded-2xl shadow-2xl"
               />
