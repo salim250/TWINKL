@@ -1,5 +1,7 @@
 {
+    "id": "/",
     "name": "Twinkl Education",
+    "scope": "/",
     "short_name": "Twinkl",
     "description": "Learning platform",
     "theme_color": "#ffffff",
