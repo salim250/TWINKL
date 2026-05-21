@@ -1,5 +1,5 @@
 import { NavigationProvider, useNavigation } from './context/NavigationContext';
-import { TranslationProvider } from './context/TranslationContext';
+import { AuthProvider } from './context/AuthContext';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -12,15 +12,15 @@ import { AboutPage } from './pages/AboutPage';
 import { TeamPage } from './pages/TeamPage';
 import { CareerPage } from './pages/CareerPage';
 import { EnrollPage } from './pages/EnrollPage';
+import { SchedulesPage } from './pages/SchedulesPage';
 import { useEffect } from 'react';
-import { initGA } from './helpers/analytics';
-import { logPageView } from './helpers/analytics';
+import { initGA, logPageView } from './helpers/analytics';
+import { TranslationProvider } from './context/TranslationContext';
 
 function PageRouter() {
   const { currentPage } = useNavigation();
 
   const renderPage = () => {
-
     switch (currentPage) {
       case 'home':
         return <HomePage />;
@@ -42,6 +42,8 @@ function PageRouter() {
         return <CareerPage />;
       case 'enroll':
         return <EnrollPage />;
+      case 'schedules':
+        return <SchedulesPage />;
       default:
         return <HomePage />;
     }
@@ -51,14 +53,14 @@ function PageRouter() {
 }
 
 function AppContent() {
-  const { currentPage } = useNavigation(); // ✅ now inside provider
+  const { currentPage } = useNavigation();
 
   useEffect(() => {
-    initGA();
+    // initGA?.();
   }, []);
 
   useEffect(() => {
-    logPageView(currentPage);
+    // logPageView?.(currentPage);
   }, [currentPage]);
 
   return (
@@ -74,11 +76,13 @@ function AppContent() {
 
 function App() {
   return (
-    <TranslationProvider>
-      <NavigationProvider>
-        <AppContent />
-      </NavigationProvider>
-    </TranslationProvider>
+    <AuthProvider>
+      <TranslationProvider>
+        <NavigationProvider>
+          <AppContent />
+        </NavigationProvider>
+      </TranslationProvider>
+    </AuthProvider>
   );
 }
 

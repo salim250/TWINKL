@@ -11,7 +11,10 @@ type Page =
   | 'team'
   | 'career'
   | 'contact'
-  | 'enroll';
+  | 'enroll'
+  | 'schedules'
+  | 'resources'
+  | 'login';
 
 interface NavigationContextType {
   currentPage: Page;
