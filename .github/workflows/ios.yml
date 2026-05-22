@@ -41,5 +41,21 @@ jobs:
           -scheme App \
           -sdk iphoneos \
           -configuration Release \
-          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGN_IDENTITY=""
         working-directory: ios/App
+
+      - name: Create Unsigned IPA
+        run: |
+          mkdir -p Payload
+          # Locate the .app file in the derived data folder
+          cp -R build/Build/Products/Release-iphoneos/*.app Payload/
+          zip -r app.ipa Payload
+          rm -rf Payload
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: unsigned-ipa
+          path: app.ipa
