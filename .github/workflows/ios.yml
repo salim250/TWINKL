@@ -50,7 +50,7 @@ jobs:
         run: |
           mkdir -p Payload
           # Locate the .app file in the derived data folder
-          cp -R build/Build/Products/Release-iphoneos/*.app Payload/
+          cp -R App-ciqptrrohcwuxefboeqkxavdjzmy/Build/Products/Release-iphoneos/*.app Payload/
           zip -r app.ipa Payload
           rm -rf Payload
 
