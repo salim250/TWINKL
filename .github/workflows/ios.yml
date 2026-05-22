@@ -1,7 +1,7 @@
 name: Build iOS App
 
 on:
-  workflow_dispatch:
+  [push, workflow_dispatch]
 
 jobs:
   build-ios:
