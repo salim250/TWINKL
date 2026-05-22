@@ -26,6 +26,10 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync ios
 
+      - name: init CocoaPods
+        run: pod init
+        working-directory: ios/App
+
       - name: Install CocoaPods
         run: pod install --repo-update
         working-directory: ios/App
