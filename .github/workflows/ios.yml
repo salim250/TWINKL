@@ -14,10 +14,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build web app
         run: npm run build
@@ -26,7 +27,7 @@ jobs:
         run: npx cap sync ios
 
       - name: Install CocoaPods
-        run: pod install
+        run: pod install --repo-update
         working-directory: ios/App
 
       - name: Build Xcode project
