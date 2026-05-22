@@ -40,5 +40,6 @@ jobs:
           -workspace App.xcworkspace \
           -scheme App \
           -sdk iphoneos \
-          -configuration Release
+          -configuration Release \
+          CODE_SIGNING_ALLOWED=NO
         working-directory: ios/App
