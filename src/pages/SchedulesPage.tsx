@@ -46,6 +46,7 @@ export function SchedulesPage() {
     return user && (schedule as Schedule).created_by === user.id;
   };
 
+  // fetch schedules from supabase and sort by date and time
   const fetchSchedules = async () => {
     setLoading(true);
     const { data, error } = await supabase
