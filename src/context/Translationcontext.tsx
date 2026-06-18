@@ -88,6 +88,8 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             "schedules.form.cancel": "Annuler",
             "schedules.form.saving": "Enregistrement...",
             "schedules.form.save": "Enregistrer",
+            "schedules.form.errors.endTimeGreater": "L'heure de fin doit être supérieure à l'heure de début.",
+            "schedules.form.errors.timeRequired": "L'heure de début et de fin sont obligatoires.",
 
             "schedules.details.title": "Détails de la leçon",
             "schedules.details.attachedResource": "Document joint",
@@ -383,6 +385,8 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             "schedules.form.cancel": "Cancel",
             "schedules.form.saving": "Saving & Uploading...",
             "schedules.form.save": "Save Lesson",
+            "schedules.form.errors.endTimeGreater": "End time must be greater than start time.",
+            "schedules.form.errors.timeRequired": "Start time and end time are required.",
 
             "schedules.details.title": "Lesson Details",
             "schedules.details.attachedResource": "Attached Resource",
@@ -678,6 +682,8 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             "schedules.form.cancel": "إلغاء",
             "schedules.form.saving": "جار الحفظ والتحميل...",
             "schedules.form.save": "حفظ الدرس",
+            "schedules.form.errors.endTimeGreater": "يجب أن يكون وقت الانتهاء بعد وقت البدء.",
+            "schedules.form.errors.timeRequired": "وقت البدء ووقت الانتهاء مطلوبان.",
 
             "schedules.details.title": "تفاصيل الدرس",
             "schedules.details.attachedResource": "المورد المرفق",

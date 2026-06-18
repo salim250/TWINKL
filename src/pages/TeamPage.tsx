@@ -95,8 +95,8 @@ export const TeamPage = () => {
                     whileHover={{ y: -8 }}
                     className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 h-full flex flex-col"
                   >
-                    <div className="relative h-64 bg-gray-200">
-                      <img src={member.image} alt={text.name} className="w-full h-full object-cover" />
+                    <div className="relative w-full aspect-[4/5] bg-gray-100 overflow-hidden">
+                      <img src={member.image} alt={text.name} className="w-full h-full object-cover object-top" />
                     </div>
 
                     <div className="p-6 flex flex-col flex-grow">

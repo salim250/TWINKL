@@ -68,6 +68,28 @@ export function SchedulesPage() {
     e.preventDefault();
     setErrorMsg(null);
     if (!user) return;
+    // Validation start/end time
+    if (!startTime || !endTime) {
+      setErrorMsg(t('schedules.form.errors.timeRequired'));
+      setUploading(false);
+      return;
+    }
+
+    // compare times safely
+    const [sh, sm] = startTime.split(':').map(Number);
+    const [eh, em] = endTime.split(':').map(Number);
+
+    const start = new Date();
+    start.setHours(sh, sm, 0, 0);
+
+    const end = new Date();
+    end.setHours(eh, em, 0, 0);
+
+    if (end <= start) {
+      setErrorMsg(t('schedules.form.errors.endTimeGreater'));
+      setUploading(false);
+      return;
+    }
     setUploading(true);
 
     let resource_path = selectedSchedule?.resource_path || null;
