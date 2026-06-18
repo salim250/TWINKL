@@ -14,6 +14,7 @@ type Page =
   | 'enroll'
   | 'schedules'
   | 'resources'
+  | 'privacy'
   | 'login';
 
 interface NavigationContextType {

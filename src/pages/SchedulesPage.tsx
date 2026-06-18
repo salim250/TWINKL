@@ -367,6 +367,7 @@ export function SchedulesPage() {
                   <label className="block text-sm font-medium text-text-dark mb-2">{t('schedules.form.attachDocument') || 'Attach Document (Optional)'}</label>
                   <input
                     type="file"
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt"
                     className="block w-full text-xs sm:text-sm text-text-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs sm:file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 cursor-pointer"
                     onChange={e => setFile(e.target.files ? e.target.files[0] : null)}
                   />

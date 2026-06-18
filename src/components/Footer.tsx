@@ -93,6 +93,7 @@ export const Footer = () => {
                 { label: t('footer.links.programs'), page: 'home' },
                 { label: t('footer.links.team'), page: 'team' },
                 { label: t('footer.links.career'), page: 'career' },
+                { label: 'Politique de confidentialite', page: 'privacy' },
                 { label: t('footer.links.contact'), page: 'contact' },
               ].map((link) => (
                 <li key={link.page}>

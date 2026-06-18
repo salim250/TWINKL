@@ -13,10 +13,12 @@ import { TeamPage } from './pages/TeamPage';
 import { CareerPage } from './pages/CareerPage';
 import { EnrollPage } from './pages/EnrollPage';
 import { SchedulesPage } from './pages/SchedulesPage';
-import { useEffect } from 'react';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { useEffect, useState } from 'react';
 import { initGA, logPageView } from './helpers/analytics';
 import { TranslationProvider } from './context/TranslationContext';
-
+import SplashScreens from './components/SplashScreens';
+import { Capacitor } from '@capacitor/core';
 function PageRouter() {
   const { currentPage } = useNavigation();
 
@@ -44,6 +46,8 @@ function PageRouter() {
         return <EnrollPage />;
       case 'schedules':
         return <SchedulesPage />;
+      case 'privacy':
+        return <PrivacyPolicyPage />;
       default:
         return <HomePage />;
     }
@@ -54,6 +58,9 @@ function PageRouter() {
 
 function AppContent() {
   const { currentPage } = useNavigation();
+  const [showSplash, setShowSplash] = useState(
+    Capacitor.isNativePlatform()
+  );
 
   useEffect(() => {
     // initGA?.();
@@ -62,6 +69,14 @@ function AppContent() {
   useEffect(() => {
     // logPageView?.(currentPage);
   }, [currentPage]);
+
+  if (showSplash && Capacitor.isNativePlatform()) {
+    return (
+      <SplashScreens
+        onComplete={() => setShowSplash(false)}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white font-body">
