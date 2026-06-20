@@ -125,18 +125,7 @@ export const EnrollPage = () => {
                   {t('enroll.application.title')}
                 </h2>
 
-                <p className="text-text-muted font-body leading-relaxed mb-6">
-                  {t('enroll.application.description')}
-                </p>
-
-                <a
-                  href="https://forms.gle/qzp2sbvmwrxw5Pqf6"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-secondary text-white px-6 py-2.5 rounded-lg font-body font-medium hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105"
-                >
-                  {t('enroll.application.button')}
-                </a>
+                <EnrollmentApplicationForm />
               </div>
             </motion.div>
           </div>

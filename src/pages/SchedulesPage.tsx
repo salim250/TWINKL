@@ -3,6 +3,8 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
 import { ChevronLeft, ChevronRight, FileText, Download, Trash2, Calendar as CalendarIcon, Clock, X, Plus, SquarePen } from 'lucide-react';
 import { useTranslation } from '../context/TranslationContext';
+import FileUpload from '../components/FileUpload';
+import { notifyError, notifySuccess } from '../helpers/toast';
 
 interface Schedule {
   id: string;
@@ -119,31 +121,31 @@ export function SchedulesPage() {
       resource_name = file.name;
     }
 
-    const { error: dbError } = isEditMode && id ? 
+    const { error: dbError } = isEditMode && id ?
       await supabase
-      .from('schedules')
-      .update({
-        title,
-        class_name: className,
-        lesson_date: lessonDate,
-        start_time: startTime,
-        end_time: endTime,
-        resource_path,
-        resource_name
-      })
-      .eq('id', id) : 
+        .from('schedules')
+        .update({
+          title,
+          class_name: className,
+          lesson_date: lessonDate,
+          start_time: startTime,
+          end_time: endTime,
+          resource_path,
+          resource_name
+        })
+        .eq('id', id) :
       await supabase.from('schedules').insert([
-      {
-        title,
-        class_name: className,
-        lesson_date: lessonDate,
-        start_time: startTime,
-        end_time: endTime,
-        resource_path,
-        resource_name,
-        created_by: user.id
-      }
-    ]);
+        {
+          title,
+          class_name: className,
+          lesson_date: lessonDate,
+          start_time: startTime,
+          end_time: endTime,
+          resource_path,
+          resource_name,
+          created_by: user.id
+        }
+      ]);
 
     if (!dbError) {
       setId(null);
@@ -158,8 +160,9 @@ export function SchedulesPage() {
       setExistingFileName(null);
       setExistingFilePath(null);
       fetchSchedules();
+      notifySuccess(isEditMode && id ? t('schedules.editSuccess') : t('schedules.addSuccess'));
     } else {
-      setErrorMsg(dbError.message || ( isEditMode && id ? 'Error updating schedule.' : 'Error adding schedule.' ));
+      notifyError(isEditMode && id ? t('schedules.editError') : t('schedules.addError'));
     }
 
     setUploading(false);
@@ -325,7 +328,7 @@ export function SchedulesPage() {
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-fade-in max-h-[90vh] flex flex-col">
             <div className="flex justify-between items-center p-4 sm:p-5 border-b border-gray-100 bg-background-light shrink-0">
               <h3 className="font-heading font-bold text-lg sm:text-xl text-primary">
-                { isEditMode && id ? t('schedules.editScheduleLesson') || 'Edit Scheduled Lesson' : t('schedules.scheduleLesson') || 'Schedule a New Lesson'}
+                {isEditMode && id ? t('schedules.editScheduleLesson') || 'Edit Scheduled Lesson' : t('schedules.scheduleLesson') || 'Schedule a New Lesson'}
               </h3>
               <button onClick={() => setIsFormModalOpen(false)} className="text-text-muted hover:text-text-dark transition-colors p-1">
                 <X size={24} />
@@ -364,17 +367,20 @@ export function SchedulesPage() {
                 </div>
 
                 <div className="col-span-1 md:col-span-2 bg-background-light p-3 sm:p-4 rounded-xl border border-gray-100">
-                  <label className="block text-sm font-medium text-text-dark mb-2">{t('schedules.form.attachDocument') || 'Attach Document (Optional)'}</label>
-                  <input
-                    type="file"
+                  <FileUpload
+                    name="certificates"
                     accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt"
-                    className="block w-full text-xs sm:text-sm text-text-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs sm:file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 cursor-pointer"
-                    onChange={e => setFile(e.target.files ? e.target.files[0] : null)}
+                    label={t("schedules.form.attachDocument")}
+                    selectText={t("career.form.selectFile")}
+                    noFileText={t("career.form.noFileChosen")}
+                    onChange={(files) => {
+                      setFile(files ? files[0] : null)
+                    }}
                   />
                   {isEditMode && existingFileName && (
                     <div className="mt-2 text-sm text-text-muted flex items-center gap-2">
                       <FileText size={14} />
-                      <span>Current file: {existingFileName}</span>
+                      <span>{t('schedules.form.currentFile') || 'Current File'}: {existingFileName}</span>
                     </div>
                   )}
                 </div>
@@ -395,7 +401,7 @@ export function SchedulesPage() {
 
       {selectedSchedule && (
         <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in">
+          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col relative overflow-hidden">
             <div className="flex justify-between items-center p-4 sm:p-5 border-b border-gray-100 bg-background-light">
               <h3 className="font-heading font-bold text-lg sm:text-xl text-primary">{t('schedules.details.title') || 'Lesson Details'}</h3>
               <button onClick={() => setSelectedSchedule(null)} className="text-text-muted hover:text-text-dark transition-colors p-1">
@@ -403,7 +409,7 @@ export function SchedulesPage() {
               </button>
             </div>
 
-            <div className="p-4 sm:p-6 space-y-4 sm:space-y-5">
+            <div className="p-4 sm:p-6 space-y-4 sm:space-y-5 overflow-y-auto flex-1">
               <div>
                 <h4 className="text-xl sm:text-2xl font-heading font-bold text-text-dark mb-1">{selectedSchedule.title}</h4>
                 <p className="text-secondary font-medium text-sm sm:text-base">{selectedSchedule.class_name}</p>
@@ -445,7 +451,7 @@ export function SchedulesPage() {
             </div>
 
             {user && isOwner(selectedSchedule) && (
-              <div className="p-4 sm:p-5 bg-background-light border-t border-gray-100 flex justify-end">
+              <div className="p-4 sm:p-5 bg-background-light border-t border-gray-100 flex justify-end shrink-0">
                 <button
                   onClick={() => openEditModal(selectedSchedule)}
                   className="w-full sm:w-auto flex justify-center items-center gap-2 text-blue-600 hover:bg-blue-50 px-5 py-2.5 rounded-lg transition-colors text-sm font-medium border border-transparent hover:border-blue-100"

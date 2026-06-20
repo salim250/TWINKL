@@ -82,6 +82,7 @@ export const TeamPage = () => {
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
+            className="pb-10"
           >
             {teamMembers.map((member, index) => {
               const text = getMemberText(member.id);
@@ -128,7 +129,7 @@ export const TeamPage = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.25 }}
-                className="bg-white rounded-2xl max-w-lg w-full p-8 relative"
+                className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col relative overflow-hidden"
               >
                 <button
                   className="absolute top-4 right-4 text-gray-400 hover:text-gray-700"
@@ -137,24 +138,26 @@ export const TeamPage = () => {
                   ✕
                 </button>
 
-                <div className="flex items-center gap-4 mb-6">
-                  <img
-                    src={selectedMember.image}
-                    className="w-20 h-20 rounded-full object-cover"
-                  />
-                  <div>
-                    <h3 className="text-xl font-heading font-bold">
-                      {selectedMember.name}
-                    </h3>
-                    <p className="text-secondary font-medium">
-                      {selectedMember.role}
-                    </p>
+                <div className="p-8 overflow-y-auto">
+                  <div className="flex items-center gap-4 mb-6">
+                    <img
+                      src={selectedMember.image}
+                      className="w-20 h-20 rounded-full object-cover"
+                    />
+                    <div>
+                      <h3 className="text-xl font-heading font-bold">
+                        {selectedMember.name}
+                      </h3>
+                      <p className="text-secondary font-medium">
+                        {selectedMember.role}
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <p className="text-text-muted leading-relaxed">
-                  {selectedMember.description}
-                </p>
+                  <p className="text-text-muted leading-relaxed">
+                    {selectedMember.description}
+                  </p>
+                </div>
               </motion.div>
             </motion.div>
           )}

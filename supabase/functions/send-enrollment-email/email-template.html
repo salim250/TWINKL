@@ -1,0 +1,78 @@
+<div style="background:#f6f7fb;padding:30px 0;font-family:Arial,Helvetica,sans-serif;">
+    <div
+        style="max-width:650px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #eaeaea;">
+
+        <!-- Header -->
+        <div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:20px 30px;color:#fff;">
+            <h1 style="margin:0;font-size:20px;letter-spacing:0.5px;">
+                New Enrollment Application
+            </h1>
+            <p style="margin:5px 0 0;font-size:13px;opacity:0.9;">
+                TWINKL Education System
+            </p>
+        </div>
+
+        <!-- Content -->
+        <div style="padding:25px 30px;">
+
+            <!-- Section -->
+            <h2
+                style="font-size:14px;color:#4f46e5;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:6px;">
+                Student Information
+            </h2>
+
+            <p style="margin:6px 0;"><b>Name:</b> {{student_name}}</p>
+            <p style="margin:6px 0;"><b>Date of Birth:</b> {{date_of_birth}}</p>
+            <p style="margin:6px 0;"><b>Gender:</b> {{gender}}</p>
+            <p style="margin:6px 0;"><b>Nationality:</b> {{nationality}}</p>
+
+            <br />
+
+            <h2
+                style="font-size:14px;color:#4f46e5;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:6px;">
+                Parent Information
+            </h2>
+
+            <p style="margin:6px 0;"><b>Parent:</b> {{parent_name_phone}}</p>
+            <p style="margin:6px 0;"><b>Signature:</b> {{parent_signature}}</p>
+
+            <br />
+
+            <h2
+                style="font-size:14px;color:#4f46e5;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:6px;">
+                Program
+            </h2>
+
+            <p style="margin:6px 0;"><b>Educational System:</b> {{educational_system}}</p>
+
+            <br />
+
+            <h2
+                style="font-size:14px;color:#4f46e5;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:6px;">
+                Subjects
+            </h2>
+
+            <div style="margin:10px 0;padding:10px;background:#f9fafb;border-radius:8px;">
+                {{subjects}}
+            </div>
+
+            <br />
+
+            <h2
+                style="font-size:14px;color:#4f46e5;margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:6px;">
+                Preferred Schedule
+            </h2>
+
+            <div style="padding:10px;background:#f9fafb;border-radius:8px;">
+                {{preferred_schedule}}
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="padding:15px 30px;background:#fafafa;font-size:12px;color:#888;text-align:center;">
+            © {{year}} TWINKL Education · Admission System
+        </div>
+
+    </div>
+</div>

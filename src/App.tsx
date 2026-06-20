@@ -19,6 +19,9 @@ import { initGA, logPageView } from './helpers/analytics';
 import { TranslationProvider } from './context/TranslationContext';
 import SplashScreens from './components/SplashScreens';
 import { Capacitor } from '@capacitor/core';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function PageRouter() {
   const { currentPage } = useNavigation();
 
@@ -53,7 +56,19 @@ function PageRouter() {
     }
   };
 
-  return <>{renderPage()}</>;
+  return <>
+    {renderPage()}
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop
+      closeOnClick
+      pauseOnHover
+      draggable
+      theme="colored"
+    />
+  </>;
 }
 
 function AppContent() {

@@ -173,32 +173,9 @@ export const CareerPage = () => {
           <div ref={applicationRef} />
 
           {showApplicationForm && (
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="mt-12 bg-white rounded-2xl p-8 md:p-12 shadow-xl max-w-3xl mx-auto"
-            >
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary/10 rounded-full mb-6">
-                  <Mail className="w-8 h-8 text-secondary" />
-                </div>
-                <h2 className="text-3xl font-heading font-bold text-text-dark mb-4 tracking-heading">
-                  {t('career.apply.title')}
-                </h2>
-                <p className="text-lg font-body text-text-muted mb-6">
-                  {t('career.apply.instruction')}
-                </p>
-                <a
-                  href="mailto:teducm@gmail.com"
-                  className="inline-flex items-center gap-2 bg-secondary text-white px-8 py-4 rounded-lg font-body font-semibold text-lg hover:bg-secondary/90 transition-all duration-200 transform hover:scale-105"
-                >
-                  <Mail className="w-5 h-5" />
-                  {t('career.apply.email')}
-                </a>
-              </div>
-            </motion.div>
+            <div className="mt-12 bg-white rounded-2xl p-8 md:p-10 text-text-dark max-w-3xl mx-auto">
+              <CareerApplicationForm />
+            </div>
           )}
         </div>
       </section>
