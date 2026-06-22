@@ -17,6 +17,14 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
   const { t } = useTranslation?.() || { t: (k: string) => k };
 
+  const getAuthErrorMessage = (message: string, t: (key: string) => string): string => {
+    if (message.includes('Invalid login credentials'))  return t('login.errors.invalidCredentials');
+    if (message.includes('Email not confirmed'))        return t('login.errors.emailNotConfirmed');
+    if (message.includes('Too many requests'))          return t('login.errors.tooManyRequests');
+    if (message.includes('User not found'))             return t('login.errors.userNotFound');
+    return t('login.errors.generic');
+};
+
   if (!isOpen) return null;
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -30,7 +38,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     });
 
     if (error) {
-      setError(error.message);
+      setError(getAuthErrorMessage(error.message, t));
       setLoading(false);
     } else {
       setLoading(false);

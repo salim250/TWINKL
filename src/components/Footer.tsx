@@ -90,7 +90,6 @@ export const Footer = () => {
               {[
                 { label: t('footer.links.home'), page: 'home' },
                 { label: t('footer.links.about'), page: 'about' },
-                { label: t('footer.links.programs'), page: 'home' },
                 { label: t('footer.links.team'), page: 'team' },
                 { label: t('footer.links.career'), page: 'career' },
                 { label: t('footer.links.contact'), page: 'contact' },

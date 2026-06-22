@@ -119,7 +119,7 @@ export const Navigation = () => {
                 <button
                   onClick={() => signOut()}
                   className="flex items-center gap-2 text-sm font-body uppercase tracking-wider text-text-dark hover:text-red-500 transition-colors"
-                  title="Log Out"
+                  title={t('logout.submit') || 'Log Out'}
                 >
                   <LogOut size={18} />
                 </button>
@@ -127,7 +127,7 @@ export const Navigation = () => {
                 <button
                   onClick={() => setIsLoginModalOpen(true)}
                   className="flex items-center gap-2 text-sm font-body uppercase tracking-wider text-text-dark hover:text-primary transition-colors"
-                  title="Log In"
+                  title={t('login.submit') || 'Log In'}
                 >
                   <LogIn size={18} />
                 </button>
@@ -209,7 +209,7 @@ export const Navigation = () => {
                   }}
                   className="w-full flex justify-center items-center gap-2 border border-red-500 text-red-500 px-6 py-2.5 rounded-lg font-body font-medium hover:bg-red-50 transition-colors"
                 >
-                  <LogOut size={18} /> Log Out
+                  <LogOut size={18} /> {t('logout.submit') || 'Log Out'}
                 </button>
               ) : (
                 <button
@@ -219,7 +219,7 @@ export const Navigation = () => {
                   }}
                   className="w-full flex justify-center items-center gap-2 border border-primary text-primary px-6 py-2.5 rounded-lg font-body font-medium hover:bg-blue-50 transition-colors"
                 >
-                  <LogIn size={18} /> Log In
+                  <LogIn size={18} /> {t('login.submit')}
                 </button>
               )}
 

@@ -11,6 +11,17 @@ const loadTemplate = async () => {
 
 const template = await loadTemplate();
 
+const loadConfirmationTemplate = async () => {
+  const res = await fetch(
+    new URL("./confirmation-template.html", import.meta.url)
+  );
+
+  return await res.text();
+};
+
+
+const confirmationTemplate = await loadConfirmationTemplate();
+
 function arrayBufferToBase64(buffer: ArrayBuffer) {
   let binary = "";
 
@@ -83,11 +94,34 @@ Deno.serve(async (req) => {
       .replace("{{year}}", new Date().getFullYear().toString());
 
     const result = await resend.emails.send({
-      from: "TWINKL Careers <admissions@twinkleducation.org>",
+      from: "TWINKL Careers <careers@twinkleducation.org>",
       to: ["contact@twinkleducation.org"],
       subject: `New Career Application - ${position}`,
       html,
       attachments,
+    });
+
+    const confirmationHtml = confirmationTemplate
+      .replace("{{full_name}}", full_name || "")
+      .replace("{{position}}", position || "")
+      .replace("{{specialization}}", specialization || "")
+      .replace("{{experience}}", experience || "")
+      .replace(
+        "{{year}}",
+        new Date().getFullYear().toString()
+      );
+
+
+    await resend.emails.send({
+
+      from: "TWINKL Careers <careers@twinkleducation.org>",
+
+      to: [email],
+
+      subject: "TWINKL Career Application",
+
+      html: confirmationHtml,
+
     });
 
     return new Response(JSON.stringify(result), {

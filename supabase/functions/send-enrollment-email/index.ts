@@ -14,6 +14,15 @@ const loadTemplate = async () => {
 
 const template = await loadTemplate();
 
+const loadConfirmationTemplate = async () => {
+  const res = await fetch(
+    new URL("./confirmation-template.html", import.meta.url)
+  );
+  return await res.text();
+};
+
+const confirmationTemplate = await loadConfirmationTemplate();
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -37,25 +46,46 @@ Deno.serve(async (req) => {
       .replace("{{date_of_birth}}", data.date_of_birth || "")
       .replace("{{gender}}", data.gender || "")
       .replace("{{nationality}}", data.nationality || "")
-      .replace("{{parent_name_phone}}", data.parent_name_phone || "")
-      .replace("{{parent_signature}}", data.parent_signature || "")
-      .replace("{{educational_system}}", data.educational_system || "")
+      .replace("{{parent_name}}", data.parent_name || "")
+      .replace("{{parent_phone}}", data.parent_phone || "")
+      .replace("{{parent_email}}", data.parent_email || "")
+      .replace("{{educational_system}}", data.program || "")
       .replace(
         "{{subjects}}",
         Array.isArray(data.subjects) ? data.subjects.join(", ") : ""
       )
-      .replace("{{preferred_schedule}}", data.preferred_schedule || "")
+      .replace("{{preferred_schedule}}", data.schedule || "")
       .replace("{{year}}", new Date().getFullYear().toString());
 
     const email = await resend.emails.send({
 
-      from: "TWINKL Education <admissions@twinkleducation.org>",
+      from: "TWINKL admissions <admissions@twinkleducation.org>",
 
       to: ["contact@twinkleducation.org"],
 
       subject: "New Enrollment Application",
 
       html: html
+    });
+
+    const confirmationHtml = confirmationTemplate
+      .replace("{{student_name}}", data.student_name || "")
+      .replace(
+        "{{year}}",
+        new Date().getFullYear().toString()
+      );
+
+
+    await resend.emails.send({
+
+      from: "TWINKL admissions <admissions@twinkleducation.org>",
+
+      to: [data.parent_email],
+
+      subject: "TWINKL Enrollment Application",
+
+      html: confirmationHtml,
+
     });
 
     return new Response(

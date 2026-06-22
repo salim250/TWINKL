@@ -1,87 +1,109 @@
-import { useRef, useState } from 'react';
-import { supabase } from '../lib/supabase';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import { useTranslation } from '../context/TranslationContext';
 import { notifyError, notifySuccess } from '../helpers/toast';
+import { EnrollmentSchema } from '../shared/schema';
+import { phoneLabels } from '../lib/phoneLabels';
+import { supabase } from '../lib/supabase';
+
+type EnrollmentFormData = z.infer<typeof EnrollmentSchema>;
+
+const SUBJECTS = [
+    'English',
+    'Mathematics',
+    'Sciences / Coordinated Combined Science',
+    'ICT',
+    'Business Studies',
+    'French',
+    'Global Perspectives',
+    'Other',
+] as const;
+
+const PROGRAM_OPTIONS = [
+    'cambridge',
+    'french',
+    'tunisian',
+    'canadian',
+    'ib',
+] as const;
+
+const toUTCPlus1 = (dateString: string) => {
+    const date = new Date(dateString);
+    const utc = date.getTime() + date.getTimezoneOffset() * 60000;
+    const utcPlus1 = new Date(utc + 60 * 60000);
+
+    const pad = (n: number) => String(n).padStart(2, '0');
+
+    return (
+        `${utcPlus1.getFullYear()}-${pad(utcPlus1.getMonth() + 1)}-${pad(utcPlus1.getDate())}` +
+        ` ${pad(utcPlus1.getHours())}:${pad(utcPlus1.getMinutes())}:${pad(utcPlus1.getSeconds())}`
+    );
+};
 
 export const EnrollmentApplicationForm = () => {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
 
-    const formRef = useRef<HTMLFormElement>(null);
-    const [loading, setLoading] = useState(false);
-    const [subjects, setSubjects] = useState<string[]>([]);
-    const [subjectError, setSubjectError] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        control,
+        watch,
+        setValue,
+        formState: { errors, isSubmitting, isValid },
+        reset,
+    } = useForm<EnrollmentFormData>({
+        resolver: zodResolver(EnrollmentSchema),
+        mode: 'onChange',
+        reValidateMode: 'onChange',
+        defaultValues: {
+            subjects: [],
+            declaration: undefined as unknown as true,
+        },
+    });
 
-    const toUTCPlus1 = (dateString: string) => {
-        const date = new Date(dateString);
-        const utc = date.getTime() + date.getTimezoneOffset() * 60000;
-        const utcPlus1 = new Date(utc + 60 * 60000);
+    const selectedSubjects = watch('subjects') || [];
 
-        const pad = (n: number) => String(n).padStart(2, "0");
-
-        return (
-            `${utcPlus1.getFullYear()}-${pad(utcPlus1.getMonth() + 1)}-${pad(utcPlus1.getDate())}` +
-            ` ${pad(utcPlus1.getHours())}:${pad(utcPlus1.getMinutes())}:${pad(utcPlus1.getSeconds())}`
-        );
-    };
-
-    const submitApplication = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!formRef.current) return;
-
-        setLoading(true);
-
-        if (subjects.length === 0) {
-            setSubjectError(true);
-            setLoading(false);
-            return;
-        }
-
-        const formData = new FormData(formRef.current);
-
-        const payload = {
-            student_name: formData.get("student_name"),
-            date_of_birth: formData.get("dob"),
-            gender: formData.get("gender"),
-            nationality: formData.get("nationality"),
-            parent_name_phone: formData.get("parent_info"),
-            educational_system: formData.get("program"),
-            subjects: formData.getAll("subjects[]"),
-            preferred_schedule: toUTCPlus1(formData.get("schedule") as string),
-            parent_signature: formData.get("parent_signature")
-        };
-
+    const onSubmit = async (data: EnrollmentFormData) => {
         try {
+            const payload = {
+                student_name: data.student_name,
+                date_of_birth: data.dob,
+                gender: data.gender,
+                nationality: data.nationality,
+                parent_name: data.parent_name,
+                parent_phone: data.parent_phone,
+                program: data.program,
+                subjects: data.subjects,
+                preferred_schedule: toUTCPlus1(data.schedule),
+                parent_email: data.parent_email,
+            };
+
             const { error } = await supabase.functions.invoke(
-                "send-enrollment-email",
+                'send-enrollment-email',
                 { body: payload }
             );
 
             if (error) throw error;
 
-            notifySuccess(t("enroll.success"));
-
-            formRef.current.reset();
-            setSubjects([]);
-
+            notifySuccess(t('enroll.success'));
+            reset();
         } catch (err) {
             console.error(err);
-            notifyError(t("enroll.error"));
-
-        } finally {
-            setLoading(false);
+            notifyError(t('enroll.error'));
         }
     };
 
     return (
         <form
-            ref={formRef}
-            onSubmit={submitApplication}
+            onSubmit={handleSubmit(onSubmit)}
             className="space-y-6"
-            encType="multipart/form-data"
+            noValidate
         >
-
             {/* Honeypot */}
-            <input type="text" name="company" className="hidden" />
+            <input type="text" name="company" className="hidden" tabIndex={-1} autoComplete="off" />
 
             {/* Student Name + DOB */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
@@ -90,12 +112,14 @@ export const EnrollmentApplicationForm = () => {
                         {t('enroll.studentName')} *
                     </label>
                     <input
-                        name="student_name"
+                        {...register('student_name')}
                         type="text"
-                        required
                         placeholder={t('enroll.studentName')}
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none"
                     />
+                    {errors.student_name && (
+                        <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.student_name.message}`)}</p>
+                    )}
                 </div>
 
                 <div>
@@ -103,11 +127,13 @@ export const EnrollmentApplicationForm = () => {
                         {t('enroll.dob')} *
                     </label>
                     <input
-                        name="dob"
+                        {...register('dob')}
                         type="date"
-                        required
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none"
                     />
+                    {errors.dob && (
+                        <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.dob.message}`)}</p>
+                    )}
                 </div>
             </div>
 
@@ -119,43 +145,101 @@ export const EnrollmentApplicationForm = () => {
 
                 <div className="flex gap-6">
                     <label className="flex items-center gap-2">
-                        <input type="radio" name="gender" value="Male" required />
+                        <input
+                            type="radio"
+                            value="Male"
+                            {...register('gender')}
+                        />
                         {t('enroll.male')}
                     </label>
 
                     <label className="flex items-center gap-2">
-                        <input type="radio" name="gender" value="Female" required />
+                        <input
+                            type="radio"
+                            value="Female"
+                            {...register('gender')}
+                        />
                         {t('enroll.female')}
                     </label>
                 </div>
+                {errors.gender && (
+                    <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.gender.message}`)}</p>
+                )}
             </div>
 
-            {/* Nationality + Parent Info */}
+            {/* Nationality + Parent Name */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <div>
                     <label className="block text-sm font-medium mb-1">
                         {t('enroll.nationality')} *
                     </label>
                     <input
-                        name="nationality"
+                        {...register('nationality')}
                         type="text"
-                        required
                         placeholder={t('enroll.nationality')}
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none"
                     />
+                    {errors.nationality && (
+                        <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.nationality.message}`)}</p>
+                    )}
                 </div>
 
                 <div>
                     <label className="block text-sm font-medium mb-1">
-                        {t('enroll.parentInfo')} *
+                        {t('enroll.parentName')} *
                     </label>
                     <input
-                        name="parent_info"
+                        {...register('parent_name')}
                         type="text"
-                        required
-                        placeholder={t('enroll.parentInfo')}
+                        placeholder={t('enroll.parentName')}
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none"
                     />
+                    {errors.parent_name && (
+                        <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.parent_name.message}`)}</p>
+                    )}
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                <div>
+                    <label className="block text-sm font-medium mb-1">
+                        {t('enroll.parentEmail')} *
+                    </label>
+                    <input
+                        {...register('parent_email')}
+                        type="email"
+                        placeholder={t('enroll.parentEmailPlaceholder')}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none"
+                    />
+                    {errors.parent_email && (
+                        <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.parent_email.message}`)}</p>
+                    )}
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium mb-1">
+                        {t('enroll.parentPhone')} *
+                    </label>
+                    <Controller
+                        name="parent_phone"
+                        control={control}
+                        render={({ field: { onChange, value, onBlur } }) => (
+                            <PhoneInput
+                                international
+                                countryCallingCodeEditable={false}
+                                defaultCountry="TN"
+                                labels={phoneLabels[language] ?? phoneLabels.en}
+                                value={value}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                placeholder={t('enroll.parentInfo')}
+                                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none [&_.PhoneInputInput]:border-none [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:px-2 [&_.PhoneInputInput]:py-0"
+                            />
+                        )}
+                    />
+                    {errors.parent_phone && (
+                        <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.parent_phone.message}`)}</p>
+                    )}
                 </div>
             </div>
 
@@ -166,17 +250,19 @@ export const EnrollmentApplicationForm = () => {
                 </label>
 
                 <select
-                    name="program"
-                    required
+                    {...register('program')}
                     className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:border-secondary focus:outline-none"
                 >
                     <option value="">{t('enroll.selectProgram')}</option>
-                    <option>{t('enroll.cambridge')}</option>
-                    <option>{t('enroll.french')}</option>
-                    <option>{t('enroll.tunisian')}</option>
-                    <option>{t('enroll.canadian')}</option>
-                    <option>{t('enroll.ib')}</option>
+                    {PROGRAM_OPTIONS.map((prog) => (
+                        <option key={prog} value={prog}>
+                            {t(`enroll.${prog}`)}
+                        </option>
+                    ))}
                 </select>
+                {errors.program && (
+                    <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.program.message}`)}</p>
+                )}
             </div>
 
             {/* Subjects */}
@@ -186,50 +272,38 @@ export const EnrollmentApplicationForm = () => {
                 </label>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                    {[
-                        'English',
-                        'Mathematics',
-                        'Sciences / Coordinated Combined Science',
-                        'ICT',
-                        'Business Studies',
-                        'French',
-                        'Global Perspectives',
-                        'Other',
-                    ].map((subject) => (
-                        <label
-                            key={subject}
-                            className={`flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition
-                            ${subjects.includes(subject)
-                                    ? 'border-secondary bg-secondary/5'
-                                    : 'border-gray-300 hover:border-secondary'}`}
-                        >
-                            <input
-                                type="checkbox"
-                                name="subjects[]"
-                                value={subject}
-                                checked={subjects.includes(subject)}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    setSubjects((prev) =>
-                                        prev.includes(value)
-                                            ? prev.filter((s) => s !== value)
-                                            : [...prev, value]
-                                    );
-                                    setSubjectError(false);
-                                }}
-                                className="h-4 w-4 text-secondary border-gray-300 rounded focus:ring-secondary"
-                            />
-                            <span className="text-sm">
-                                {t(`enroll.subjects.${subject}`, subject)}
-                            </span>
-                        </label>
-                    ))}
+                    {SUBJECTS.map((subject) => {
+                        const isSelected = selectedSubjects.includes(subject);
+                        return (
+                            <label
+                                key={subject}
+                                className={`flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition
+                  ${isSelected
+                                        ? 'border-secondary bg-secondary/5'
+                                        : 'border-gray-300 hover:border-secondary'}`}
+                            >
+                                <input
+                                    type="checkbox"
+                                    value={subject}
+                                    checked={isSelected}
+                                    onChange={() => {
+                                        const updated = isSelected
+                                            ? selectedSubjects.filter((s) => s !== subject)
+                                            : [...selectedSubjects, subject];
+                                        setValue('subjects', updated, { shouldValidate: true });
+                                    }}
+                                    className="h-4 w-4 text-secondary border-gray-300 rounded focus:ring-secondary"
+                                />
+                                <span className="text-sm">
+                                    {t(`enroll.subjects.${subject}`, subject)}
+                                </span>
+                            </label>
+                        );
+                    })}
                 </div>
 
-                {subjectError && (
-                    <p className="text-xs text-red-500 mt-2">
-                        {t('enroll.subjectError')}
-                    </p>
+                {errors.subjects && (
+                    <p className="text-xs text-red-500 mt-2">{t(`enroll.form.${errors.subjects.message}`)}</p>
                 )}
 
                 <p className="text-xs text-gray-500 mt-2">
@@ -237,51 +311,46 @@ export const EnrollmentApplicationForm = () => {
                 </p>
             </div>
 
-            {/* Schedule + Signature */}
+            {/* Schedule + Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <div>
                     <label className="block text-sm font-medium mb-1">
                         {t('enroll.schedule')} *
                     </label>
                     <input
-                        name="schedule"
+                        {...register('schedule')}
                         type="datetime-local"
-                        required
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none"
                     />
-                </div>
-
-                <div>
-                    <label className="block text-sm font-medium mb-1">
-                        {t('enroll.signature')} *
-                    </label>
-                    <input
-                        name="parent_signature"
-                        type="text"
-                        required
-                        placeholder={t('enroll.signaturePlaceholder')}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none"
-                    />
+                    {errors.schedule && (
+                        <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.schedule.message}`)}</p>
+                    )}
                 </div>
             </div>
 
             {/* Declaration */}
             <div className="mb-6">
                 <label className="flex items-start gap-2 text-sm">
-                    <input type="checkbox" name="parent_declaration" required />
+                    <input
+                        type="checkbox"
+                        {...register('declaration')}
+                    />
                     <span>
                         {t('enroll.declaration')}
                     </span>
                 </label>
+                {errors.declaration && (
+                    <p className="text-xs text-red-500 mt-1">{t(`enroll.form.${errors.declaration.message}`)}</p>
+                )}
             </div>
 
             {/* Submit */}
             <button
-                disabled={loading}
+                disabled={!isValid || isSubmitting}
                 type="submit"
-                className="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-secondary/90 transition"
+                className="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-secondary/90 transition disabled:opacity-60 disabled:cursor-not-allowed"
             >
-                {loading ? t('enroll.sending') : t('enroll.submit')}
+                {isSubmitting ? t('enroll.sending') : t('enroll.submit')}
             </button>
         </form>
     );
