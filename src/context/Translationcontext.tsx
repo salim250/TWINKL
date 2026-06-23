@@ -286,7 +286,7 @@ export const TranslationProvider = ({ children }: TranslationProviderProps) => {
             'enroll.form.parentEmail.required': 'L\'email du parent est requis.',
             'enroll.form.program.required': 'Le choix du programme est requis.',
             'enroll.form.declaration.required': 'Vous devez accepter la déclaration pour soumettre l\'inscription.',
-            'enroll.form.subject.required': 'Veuillez sélectionner au moins une matière d\'intérêt.',
+            'enroll.form.subjects.required': 'Veuillez sélectionner au moins une matière d\'intérêt.',
             'enroll.form.subject.error': 'Veuillez sélectionner au moins une matière d\'intérêt.',
             'enroll.form.schedule.required': 'L\'horaire est requis.',
             'enroll.form.parentPhone.invalid': 'Numéro de téléphone du parent invalide.',

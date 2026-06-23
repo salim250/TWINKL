@@ -1,16 +1,16 @@
-import { isValidPhoneNumber } from "npm:react-phone-number-input";
-import { z } from "npm:zod";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { z } from "zod";
 
-const safeString = (fieldName: string) =>
+const safeString = (field: string) =>
     z
         .string()
         .transform((val) => val.trim())
         .refine((val) => val.length > 0, {
-            message: `${fieldName} is required`,
+            message: `${field}.required`,
         });
 
 export const EnrollmentSchema = z.object({
-    student_name: safeString("Student name"),
+    student_name: safeString("studentName"),
 
     dob: z.string().refine((dob) => {
         const birth = new Date(dob);
@@ -18,59 +18,85 @@ export const EnrollmentSchema = z.object({
 
         const age =
             today.getFullYear() - birth.getFullYear() -
-            (today < new Date(today.getFullYear(), birth.getMonth(), birth.getDate()) ? 1 : 0);
+            (today < new Date(
+                today.getFullYear(),
+                birth.getMonth(),
+                birth.getDate()
+            ) ? 1 : 0);
 
         return age >= 6;
-    }, "Child must be at least 6 years old"),
+    }, "dob.atLeastSix"),
 
-    gender: z.enum(["Male", "Female"]),
+    gender: z.enum(["Male", "Female"], {
+        message: "gender.required",
+    }),
 
-    nationality: safeString("Nationality"),
+    nationality: safeString("nationality"),
 
-    parent_name: safeString("Parent name"),
+    parent_name: safeString("parentName"),
 
-    parent_phone: z.string().refine(
-        (value) => isValidPhoneNumber(value || ""),
-        {
-            message: "Invalid phone number",
+    parent_phone: z.string().optional().superRefine((value, ctx) => {
+        if (!value || value.trim() === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "parentPhone.required",
+            });
+            return;
         }
-    ),
 
-    parent_email: z.string().email("Invalid email"),
+        if (!isValidPhoneNumber(value)) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "parentPhone.invalid",
+            });
+        }
+    }),
 
-    program: safeString("Program"),
+    parent_email: z.string().email("parentEmail.invalid"),
 
-    subjects: z.array(z.string()).min(1, "Select at least one subject"),
+    program: safeString("program"),
 
-    schedule: z.string().min(1, "Schedule is required"),
+    subjects: z.array(z.string()).min(1, "subjects.required"),
+
+    schedule: z.string().min(1, "schedule.required"),
 
     declaration: z.literal(true, {
-        message: "You must accept the declaration"
+        message: "declaration.required",
     }),
 });
 
+
 export const CareerSchema = z.object({
-    full_name: safeString("Full name"),
+    full_name: safeString("fullName"),
 
-    email: z.string().email("Invalid email"),
+    email: z.string().email("email.invalid"),
 
-    phone: z.string().refine(
-        (value) => isValidPhoneNumber(value || ""),
-        {
-            message: "Invalid phone number",
+    phone: z.string().optional().superRefine((value, ctx) => {
+        if (!value || value.trim() === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "phone.required",
+            });
+            return;
         }
-    ),
 
-    position: safeString("Position"),
+        if (!isValidPhoneNumber(value)) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "phone.invalid",
+            });
+        }
+    }),
 
-    specialization: safeString("Specialization"),
+    position: safeString("position"),
 
-    experience: z
-        .coerce
+    specialization: safeString("specialization"),
+
+    experience: z.coerce
         .number({
-            message: "Experience is required"
+            message: "experience.required",
         })
-        .min(0, "Experience cannot be negative"),
+        .min(0, "experience.negative"),
 
     cv: z.any().optional(),
 
