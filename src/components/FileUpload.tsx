@@ -65,7 +65,7 @@ export default function FileUpload({
                 />
 
                 {/* File name display */}
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-gray-600 flex-1 min-w-0 truncate">
                     {fileName || noFileText}
                 </span>
             </div>

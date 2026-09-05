@@ -96,9 +96,11 @@ export const CareerSchema = z.object({
         .number({
             message: "experience.required",
         })
-        .min(0, "experience.negative"),
+        .min(0, "experience.required"),
 
-    cv: z.any().optional(),
+    cv: z.any().refine((v) => v instanceof File, {
+        message: "cv.required",
+    }),
 
     cover_letter: z.any().optional(),
 });

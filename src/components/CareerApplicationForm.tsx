@@ -19,6 +19,7 @@ export const CareerApplicationForm = () => {
     register,
     handleSubmit,
     control,
+    watch,
     setValue,
     formState: { errors, isSubmitting, isValid },
     reset,
@@ -27,12 +28,12 @@ export const CareerApplicationForm = () => {
     mode: 'onChange'
   });
 
-  const onSubmit = async (data: CareerFormInput) => {
+      const onSubmit = async (data: CareerFormInput) => {
     try {
       const formData = new FormData();
 
       Object.entries(data).forEach(([key, value]) => {
-        if (value) formData.append(key, value as any);
+        if (value !== undefined && value !== null) formData.append(key, value as any);
       });
 
       const { error } = await supabase.functions.invoke(
@@ -107,14 +108,14 @@ export const CareerApplicationForm = () => {
       </div>
       <div className="mb-5">
         <label className="block text-sm font-medium mb-1">{t('career.form.experience')} *</label>
-        <input type="number" min="0" {...register("experience")} placeholder={t('career.form.placeholders.experience')} className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none" rows={4} />
+        <input type="number" min="0" {...register("experience", { valueAsNumber: true })} placeholder={t('career.form.placeholders.experience')} className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:outline-none" rows={4} />
         {errors.experience && (
           <p className="text-red-500 text-xs">{t(`career.form.${errors.experience.message}`)}</p>
         )}
       </div>
       <div className="mb-5">
         <FileUpload
-          name="certificates"
+          name="cv"
           accept=".pdf,.doc,.docx"
           label={t("career.form.cv")}
           selectText={t("career.form.selectFile")}
@@ -123,10 +124,13 @@ export const CareerApplicationForm = () => {
             setValue("cv", files?.[0], { shouldValidate: true });
           }}
         />
+        {errors.cv && (
+          <p className="text-red-500 text-xs">{t(`career.form.${errors.cv.message}`)}</p>
+        )}
       </div>
       <div className="mb-5">
         <FileUpload
-          name="certificates"
+          name="cover_letter"
           accept=".pdf,.doc,.docx"
           label={t("career.form.coverLetter")}
           selectText={t("career.form.selectFile")}
@@ -137,7 +141,7 @@ export const CareerApplicationForm = () => {
         />
       </div>
 
-      <button disabled={!isValid || isSubmitting}
+      <button disabled={isSubmitting || !isValid || !watch('cv') || watch('experience') === undefined || watch('experience') === ''}
         type="submit"
         className="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-secondary/90 transition disabled:opacity-60 disabled:cursor-not-allowed">
         {isSubmitting ? 'Sending...' : 'Submit Application'}

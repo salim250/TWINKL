@@ -54,7 +54,7 @@ Deno.serve(async (req) => {
         "{{subjects}}",
         Array.isArray(data.subjects) ? data.subjects.join(", ") : ""
       )
-      .replace("{{preferred_schedule}}", data.schedule || "")
+      .replace("{{preferred_schedule}}", data.preferred_schedule || "")
       .replace("{{year}}", new Date().getFullYear().toString());
 
     const email = await resend.emails.send({

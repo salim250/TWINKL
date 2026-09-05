@@ -64,9 +64,10 @@ Deno.serve(async (req) => {
     const position = formData.get("position");
     const specialization = formData.get("specialization");
     const experience = formData.get("experience");
+    const experienceVal = experience === null ? "" : String(experience);
 
-    const cv = formData.get("cv") as File;
-    const certificates = formData.get("certificates") as File | null;
+    const cv = formData.get("cv") as File | null;
+    const cover_letter = formData.get("cover_letter") as File | null;
 
     const attachments: any[] = [];
 
@@ -77,10 +78,10 @@ Deno.serve(async (req) => {
       });
     }
 
-    if (certificates) {
+    if (cover_letter) {
       attachments.push({
-        filename: certificates.name,
-        content: await fileToBase64(certificates),
+        filename: cover_letter.name,
+        content: await fileToBase64(cover_letter),
       });
     }
 
@@ -90,7 +91,7 @@ Deno.serve(async (req) => {
       .replace("{{phone}}", phone || "")
       .replace("{{position}}", position || "")
       .replace("{{specialization}}", specialization || "")
-      .replace("{{experience}}", experience || "")
+      .replace("{{experience}}", experienceVal)
       .replace("{{year}}", new Date().getFullYear().toString());
 
     const result = await resend.emails.send({
@@ -105,11 +106,8 @@ Deno.serve(async (req) => {
       .replace("{{full_name}}", full_name || "")
       .replace("{{position}}", position || "")
       .replace("{{specialization}}", specialization || "")
-      .replace("{{experience}}", experience || "")
-      .replace(
-        "{{year}}",
-        new Date().getFullYear().toString()
-      );
+      .replace("{{experience}}", experienceVal)
+      .replace("{{year}}", new Date().getFullYear().toString());
 
 
     await resend.emails.send({
